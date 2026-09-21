@@ -19,11 +19,16 @@ def provenance(project):
     # Aiškus git-dir veikia ir kai projekto savininkas skiriasi nuo vykdytojo.
     repository = next((p / '.git' for p in [project, *project.parents] if (p / '.git').is_dir()), None)
     command = ['git', f'--git-dir={repository}', 'rev-parse', '--verify', 'HEAD'] if repository else ['git', 'rev-parse', '--verify', 'HEAD']
-    result = subprocess.run(command, cwd=project, capture_output=True, text=True)
+    try:
+        result = subprocess.run(command, cwd=project, capture_output=True, text=True)
+        revision = result.stdout.strip() if result.returncode == 0 else None
+        git_error = result.stderr.strip() if result.returncode else None
+    except OSError as exc:
+        revision, git_error = None, str(exc)
     return {'created_utc': datetime.now(timezone.utc).isoformat(), 'code_sha256': identity,
-            'file_sha256': hashes, 'git_revision': result.stdout.strip() if result.returncode == 0 else None,
+            'file_sha256': hashes, 'git_revision': revision,
             'git_status_note': 'File hashes identify the actual executed files, including uncommitted changes.',
-            'git_error': result.stderr.strip() if result.returncode else None}
+            'git_error': git_error}
 
 
 def planned_fits(cfg):
