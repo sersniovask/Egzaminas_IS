@@ -1,0 +1,147 @@
+{
+  "source": "https://openml.org/data/v1/download/54/vehicle.arff",
+  "openml_id": 54,
+  "version": 1,
+  "md5": "fbba18157b188f309d772f9ca4e578f5",
+  "rows": 846,
+  "features": [
+    "COMPACTNESS",
+    "CIRCULARITY",
+    "DISTANCE_CIRCULARITY",
+    "RADIUS_RATIO",
+    "PR.AXIS_ASPECT_RATIO",
+    "MAX.LENGTH_ASPECT_RATIO",
+    "SCATTER_RATIO",
+    "ELONGATEDNESS",
+    "PR.AXIS_RECTANGULARITY",
+    "MAX.LENGTH_RECTANGULARITY",
+    "SCALED_VARIANCE_MAJOR",
+    "SCALED_VARIANCE_MINOR",
+    "SCALED_RADIUS_OF_GYRATION",
+    "SKEWNESS_ABOUT_MAJOR",
+    "SKEWNESS_ABOUT_MINOR",
+    "KURTOSIS_ABOUT_MAJOR",
+    "KURTOSIS_ABOUT_MINOR",
+    "HOLLOWS_RATIO"
+  ],
+  "cached_file_modified_utc": "2026-09-20T17:50:49.273480+00:00",
+  "class_counts": {
+    "bus": 218,
+    "opel": 212,
+    "saab": 217,
+    "van": 199
+  },
+  "duplicate_rows": 0,
+  "missing_cells": 0,
+  "feature_stats": {
+    "COMPACTNESS": {
+      "min": 73.0,
+      "max": 119.0,
+      "median": 93.0,
+      "variance": 67.7264166233534
+    },
+    "CIRCULARITY": {
+      "min": 33.0,
+      "max": 59.0,
+      "median": 44.0,
+      "variance": 38.022244856898546
+    },
+    "DISTANCE_CIRCULARITY": {
+      "min": 40.0,
+      "max": 112.0,
+      "median": 80.0,
+      "variance": 248.44722347970423
+    },
+    "RADIUS_RATIO": {
+      "min": 104.0,
+      "max": 333.0,
+      "median": 167.0,
+      "variance": 1119.0627008478223
+    },
+    "PR.AXIS_ASPECT_RATIO": {
+      "min": 47.0,
+      "max": 138.0,
+      "median": 61.0,
+      "variance": 62.15095512745278
+    },
+    "MAX.LENGTH_ASPECT_RATIO": {
+      "min": 2.0,
+      "max": 55.0,
+      "median": 8.0,
+      "variance": 21.146169709773154
+    },
+    "SCATTER_RATIO": {
+      "min": 112.0,
+      "max": 265.0,
+      "median": 157.0,
+      "variance": 1103.9221478910629
+    },
+    "ELONGATEDNESS": {
+      "min": 26.0,
+      "max": 61.0,
+      "median": 43.0,
+      "variance": 60.94833704989129
+    },
+    "PR.AXIS_RECTANGULARITY": {
+      "min": 17.0,
+      "max": 29.0,
+      "median": 20.0,
+      "variance": 6.71123881539605
+    },
+    "MAX.LENGTH_RECTANGULARITY": {
+      "min": 118.0,
+      "max": 188.0,
+      "median": 146.0,
+      "variance": 210.45508134511448
+    },
+    "SCALED_VARIANCE_MAJOR": {
+      "min": 130.0,
+      "max": 320.0,
+      "median": 178.5,
+      "variance": 984.4707076549917
+    },
+    "SCALED_VARIANCE_MINOR": {
+      "min": 184.0,
+      "max": 1018.0,
+      "median": 364.0,
+      "variance": 31183.37630149389
+    },
+    "SCALED_RADIUS_OF_GYRATION": {
+      "min": 109.0,
+      "max": 268.0,
+      "median": 173.0,
+      "variance": 1058.0219039395515
+    },
+    "SKEWNESS_ABOUT_MAJOR": {
+      "min": 59.0,
+      "max": 135.0,
+      "median": 71.5,
+      "variance": 55.988521983580085
+    },
+    "SKEWNESS_ABOUT_MINOR": {
+      "min": 0.0,
+      "max": 22.0,
+      "median": 6.0,
+      "variance": 24.161601808538585
+    },
+    "KURTOSIS_ABOUT_MAJOR": {
+      "min": 0.0,
+      "max": 41.0,
+      "median": 11.0,
+      "variance": 79.67276545445401
+    },
+    "KURTOSIS_ABOUT_MINOR": {
+      "min": 176.0,
+      "max": 206.0,
+      "median": 188.0,
+      "variance": 37.949361199134856
+    },
+    "HOLLOWS_RATIO": {
+      "min": 181.0,
+      "max": 211.0,
+      "median": 197.0,
+      "variance": 55.27029855417511
+    }
+  },
+  "constant_features": []
+}

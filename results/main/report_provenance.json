@@ -1,0 +1,21 @@
+{
+  "created_utc": "2026-09-21T17:27:56.843257+00:00",
+  "code_sha256": "bb006691d267a844cff9b1713789e186650a85b0d4c0e758d5556fc9e3378ec9",
+  "file_sha256": {
+    "build_report.py": "b419b67cb67ab62f23a59ea05268d85d47958c6b8a391a414b42afd4695f5108",
+    "configs\\main.yaml": "4ac336a24b12cf3c7992ea3a6ae1762ccfa63aa7f4265fdff08686c46637e232",
+    "make_notebooks.py": "f61eba6cf918fa0d5c45d81d2eae65d2169d6a24a526b893bac7d95470faffb7",
+    "predict.py": "b9076ab8a0e399e3a3323f8c7e4cd27512aedaf650d0fb8000db61fe6d6ae769",
+    "requirements.txt": "d996c3e0415a8375f1d9cf3466fb746cd18069a569db2617975d15d98602f7c0",
+    "run_experiment.py": "3a33b0d099c75003e558ee16d7e10dffee75b3a4ce7fad22a0fa81052db6b840",
+    "src\\__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src\\data.py": "bc79815a18b1ab731781bbfe9edcf7f62d44004828186acedc985dd99b5c4b41",
+    "src\\error_analysis.py": "ba5ca1c0fe11a74fa322e0a8d9e9f7dec224f83fedc10a7da98d30ea30586c62",
+    "src\\models.py": "8d70b5485d464e5b55aad2dc1e032ebbf311800af7d74af4601a254ef892cbb9",
+    "src\\provenance.py": "7496973aa6a80a257f3496f9a6d4d9dfd670ee332c2ac22af0d89e508ca00793",
+    "verify_results.py": "af36fc796eed91944682f00ba586278fb787d9da2a6d1963d7341f358b5696e2"
+  },
+  "git_revision": "f6c948cef12602bf5b1344e759e18ad3aef09439",
+  "git_status_note": "File hashes identify the actual executed files, including uncommitted changes.",
+  "git_error": null
+}

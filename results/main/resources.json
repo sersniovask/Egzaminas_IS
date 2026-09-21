@@ -1,0 +1,17 @@
+{
+  "model_fits": 18951,
+  "wall_seconds_before_reporting": 1597.890906799992,
+  "peak_process_rss_bytes": 242561024,
+  "jobs": 1,
+  "native_thread_limit": 4,
+  "scope": "Main process: training, predictions, diagnostics and figure generation; reporting subprocess excluded",
+  "within_fit_budget": true,
+  "within_time_budget": true,
+  "within_memory_budget": true,
+  "report_peak_rss_bytes": 183533568,
+  "verification_peak_rss_bytes": 153518080,
+  "workflow_peak_rss_upper_bound_bytes": 426094592,
+  "first_report_completed_utc": "2026-09-21T17:26:32.855957+00:00",
+  "seconds_from_manifest_to_first_report": 1607.343789,
+  "whole_workflow_memory_within_2gb": true
+}

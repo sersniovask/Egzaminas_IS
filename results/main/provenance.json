@@ -1,0 +1,20 @@
+{
+  "created_utc": "2026-09-21T16:59:45.512168+00:00",
+  "code_sha256": "0ee779619cc14b6b724e8a1ba59308c3dbbf7900970a8fa324b4c45cad5b32f1",
+  "file_sha256": {
+    "build_report.py": "e41c47e73db3ceb534f035e64aa86ddf225d00fb5a00048242eccee1d6d95c57",
+    "configs\\main.yaml": "4ac336a24b12cf3c7992ea3a6ae1762ccfa63aa7f4265fdff08686c46637e232",
+    "make_notebooks.py": "f61eba6cf918fa0d5c45d81d2eae65d2169d6a24a526b893bac7d95470faffb7",
+    "predict.py": "b9076ab8a0e399e3a3323f8c7e4cd27512aedaf650d0fb8000db61fe6d6ae769",
+    "requirements.txt": "d996c3e0415a8375f1d9cf3466fb746cd18069a569db2617975d15d98602f7c0",
+    "run_experiment.py": "3a33b0d099c75003e558ee16d7e10dffee75b3a4ce7fad22a0fa81052db6b840",
+    "src\\__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src\\data.py": "bc79815a18b1ab731781bbfe9edcf7f62d44004828186acedc985dd99b5c4b41",
+    "src\\models.py": "8d70b5485d464e5b55aad2dc1e032ebbf311800af7d74af4601a254ef892cbb9",
+    "src\\provenance.py": "64dc70f27f9df1528a9ed941db7a91b8b791dd4a50a9f5dc2004719c443ccc68",
+    "verify_results.py": "5ab4a4b414244049210adbde23020d37c4850a6ebd22a8b0a72eb6ba587df780"
+  },
+  "git_revision": null,
+  "git_status_note": "File hashes identify the actual executed files, including uncommitted changes.",
+  "git_error": "fatal: detected dubious ownership in repository at 'C:/Users/sersn/Documents/ChatGPT/IS Egzaminas'\nTo add an exception for this directory, call:\n\n\tgit config --global --add safe.directory 'C:/Users/sersn/Documents/ChatGPT/IS Egzaminas'\n\nSet the environment variable GIT_TEST_DEBUG_UNSAFE_DIRECTORIES=true and run\nagain for more information."
+}

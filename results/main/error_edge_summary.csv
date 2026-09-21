@@ -1,0 +1,3 @@
+region,predictions,errors,error_rate
+Bent vienas kraštinis požymis,2205,309,0.1401360544217687
+Visi požymiai tarp 5 ir 95 procentilių,2025,362,0.17876543209876544

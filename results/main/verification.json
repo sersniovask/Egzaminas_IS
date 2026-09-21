@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "verification_peak_rss_bytes": 153518080,
+  "fit_budget_checked": true,
+  "inner_search_tables": 251,
+  "model_fits": 18951,
+  "runtime_and_memory_checked": true,
+  "outer_splits": 50,
+  "model_variants": 7,
+  "fold_records": 350,
+  "prediction_records": 29610,
+  "robustness_records": 25000,
+  "permutation_records": 900,
+  "data_md5": "fbba18157b188f309d772f9ca4e578f5",
+  "manual_metric_recalculation": true,
+  "same_test_indices_for_all_models": true,
+  "final_model_predicts": true
+}

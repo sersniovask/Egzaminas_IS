@@ -1,0 +1,10 @@
+{
+  "baseline": "knn",
+  "mean_difference": 0.13358265434674768,
+  "corrected_95pct_ci": [
+    0.09699493671800172,
+    0.17017037197549365
+  ],
+  "positive_repeats": 5,
+  "confirmed": true
+}
