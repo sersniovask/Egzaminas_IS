@@ -1,0 +1,17 @@
+seed: 2026
+openml_id: 54
+openml_version: 1
+outer_folds: 10
+outer_seeds: [2026, 2027, 2028, 2029, 2030]
+inner_folds: 5
+noise_sigmas: [0.05, 0.10, 0.20]
+missing_rates: [0.05, 0.10]
+robustness_repeats: 20
+svm_C: [0.1, 1, 10, 100]
+svm_gamma: [scale, 0.001, 0.01, 0.1, 1]
+mlp_hidden: [16, 32, [32, 16]]
+mlp_alpha: [0.0001, 0.01]
+mlp_learning_rate: [0.001, 0.01]
+rbf_centers: [8, 16, 32]
+rbf_width: [0.5, 1]
+rbf_alpha: [0.001, 0.01, 0.1]
