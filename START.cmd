@@ -29,7 +29,7 @@ if not errorlevel 1 goto lab
 ".venv\Scripts\python.exe" -m pip install jupyterlab ipykernel
 if errorlevel 1 goto failed
 :lab
-".venv\Scripts\python.exe" -m jupyterlab
+".venv\Scripts\python.exe" start_jupyter.py
 if errorlevel 1 goto failed
 exit /b 0
 

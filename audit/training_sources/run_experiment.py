@@ -40,16 +40,11 @@ METHODS = ["centroid", "knn", "svm", "mlp", "rbf"]
 ABLATIONS = ["svm_linear", "svm_unscaled"]
 
 
-# Palygina tikrąsias ir prognozuotas klases; grąžina dviejų metrikų žodyną.
-# Macro-F1 – keturių klasių F1 vidurkis; balanced accuracy – klasių jautrumų vidurkis.
 def metrics(y_true, y_pred):
     return {"macro_f1": f1_score(y_true, y_pred, labels=CLASSES, average="macro", zero_division=0),
             "balanced_accuracy": balanced_accuracy_score(y_true, y_pred)}
 
 
-# Pagal fiksuotas sėklas generuoja išorinius mokymo ir testo indeksus.
-# Grąžina po (pakartojimas, dalis, mokymo indeksai, testo indeksai).
-# Stratifikacija apytiksliai išsaugo klasių proporcijas; 5 × 10 duoda 50 skaidinių.
 def make_outer_splits(X, y, cfg):
     # Kiekvienas pakartojimas turi savo nustatytą sėklą, visiems modeliams indeksai vienodi.
     for repeat, seed in enumerate(cfg["outer_seeds"]):
@@ -58,22 +53,17 @@ def make_outer_splits(X, y, cfg):
             yield repeat, fold, train, test
 
 
-# Moko tik su X_train ir y_train. Parametrus renkasi vidinėje CV.
-# Grąžina išmokytą geriausią grandinę ir parametrus; prireikus išsaugo visų kandidatų lentelę.
 def fit_model(name, X_train, y_train, cfg, seed, jobs, audit_path=None):
     scaled = name != "svm_unscaled"
     base_name = "svm" if name == "svm_unscaled" else name
     pipeline = build_pipeline(base_name, seed, scaled=scaled)
     grid = grid_for(base_name, cfg)
-    # Baseline neturi derinamo tinklelio, todėl mokomas tiesiogiai vieną kartą.
     if grid is None:
         return pipeline.fit(X_train, y_train), {}
     inner = StratifiedKFold(n_splits=cfg["inner_folds"], shuffle=True, random_state=seed)
     # GridSearchCV mokosi tik iš išorinio mokymo skaidinio; pirminė metrika Macro-F1.
     search = GridSearchCV(pipeline, grid, scoring="f1_macro", cv=inner, n_jobs=jobs,
                           error_score="raise", refit=True)
-    # Kiekvienas kandidatas mokomas vidinės CV dalyse. refit=True geriausią
-    # variantą vėl išmoko su visa išorine mokymo dalimi, bet be išorinio testo.
     search.fit(X_train, y_train)
     if audit_path is not None:
         audit_path.parent.mkdir(parents=True, exist_ok=True)
@@ -81,22 +71,17 @@ def fit_model(name, X_train, y_train, cfg, seed, jobs, audit_path=None):
     return search.best_estimator_, search.best_params_
 
 
-# Gauna porinius metrikų skirtumus ir mokymo / testo dydžius.
-# Grąžina pataisyto apytikslio 95 % intervalo ribas, atsižvelgdama į CV priklausomybę.
 def corrected_ci(differences, n_test, n_train):
     """Nadeau–Bengio pataisa koreliuotiems kartotinės CV skirtumams."""
     d = np.asarray(differences, dtype=float)
     if len(d) < 2:
         return [None, None]
     variance = d.var(ddof=1)
-    # Testo ir mokymo dydžių santykis padidina paklaidą dėl persidengiančių mokymo imčių.
     standard_error = np.sqrt((1 / len(d) + n_test / n_train) * variance)
     radius = stats.t.ppf(0.975, len(d) - 1) * standard_error
     return [float(d.mean() - radius), float(d.mean() + radius)]
 
 
-# Išmokytą modelį tikrina su triukšmu ir trūkstamais testo langeliais.
-# Grąžina metrikų įrašų sąrašą; nekeičia originalaus testo ir modelio nemoko iš naujo.
 def perturbed_scores(model, X_test, y_test, train_std, cfg, split_id, name):
     out = []
     original = X_test.to_numpy(dtype=float)
@@ -105,13 +90,10 @@ def perturbed_scores(model, X_test, y_test, train_std, cfg, split_id, name):
             for realization in range(cfg["robustness_repeats"]):
                 # Ta pati perturbacija taikoma kiekvienam modeliui, tik bandymo objektams.
                 rng = np.random.default_rng(cfg["seed"] + split_id * 10000 + realization * 100 + int(level * 1000))
-                # Kiekviena realizacija pradedama nuo švaraus testo; trikdžiai nesikaupia.
                 changed = original.copy()
                 if kind == "noise":
-                    # Kiekvienam požymiui triukšmo SD = pasirinktas lygis × jo mokymo dalies SD.
                     changed += rng.normal(0, level, changed.shape) * train_std
                 else:
-                    # Atsitiktinai paslepiami langeliai; modelio imputatorius naudos mokymo medianas.
                     changed[rng.random(changed.shape) < level] = np.nan
                 pred = model.predict(pd.DataFrame(changed, columns=X_test.columns, index=X_test.index))
                 out.append({"method": name, "split": split_id, "kind": kind, "level": level,
@@ -119,8 +101,6 @@ def perturbed_scores(model, X_test, y_test, train_std, cfg, split_id, name):
     return out
 
 
-# Kiekvienai prognozei grąžina mažiausią absoliutų OVO balą tarp porų su prognozuota klase.
-# Tai diagnostinis rodiklis, ne tikimybė ir ne tiesioginis geometrinis atstumas.
 def svm_margin(model, X_test, predicted):
     # SVC OVO grąžina šešias porines funkcijas; diagnostikai naudojamas mažiausias |balas|.
     values = model.decision_function(X_test)
@@ -133,8 +113,6 @@ def svm_margin(model, X_test, predicted):
     return selected
 
 
-# Eksperimento sąrašus paverčia lentelėmis, išsaugo CSV, JSON ir grafikus.
-# Grąžina metodų suvestinę ir hipotezės patikros žodyną; gali veikti ir po tarpinio skaidinio.
 def save_outputs(out_dir, cfg, metadata, records, predictions, robustness, importances, models):
     out_dir.mkdir(parents=True, exist_ok=True)
     folds = pd.DataFrame(records)
@@ -151,7 +129,6 @@ def save_outputs(out_dir, cfg, metadata, records, predictions, robustness, impor
                    "pandas": pd.__version__, "scipy": scipy.__version__, "scikit_learn": sklearn.__version__}
     (out_dir / "environment.json").write_text(json.dumps(environment, indent=2), encoding="utf-8")
 
-    # Skaičiuojamas vienodai svertas skaidinių metrikų vidurkis ir jų SD.
     summary = folds.groupby("method").agg(macro_f1_mean=("macro_f1", "mean"),
                                              macro_f1_sd=("macro_f1", "std"),
                                              balanced_accuracy_mean=("balanced_accuracy", "mean"),
@@ -159,15 +136,12 @@ def save_outputs(out_dir, cfg, metadata, records, predictions, robustness, impor
                                              train_seconds_mean=("train_seconds", "mean")).sort_values("macro_f1_mean", ascending=False)
     summary.to_csv(out_dir / "results_summary.csv")
     baseline = summary.loc[["centroid", "knn"], "macro_f1_mean"].idxmax()
-    # Skaidinio numeris sujungia tik palyginamas metrikas iš tų pačių testo objektų.
     pair = folds.pivot(index="split", columns="method", values="macro_f1")
     differences = pair["svm"] - pair[baseline]
     n_test = metadata["rows"] / cfg["outer_folds"]
     n_train = metadata["rows"] - n_test
     ci = corrected_ci(differences, n_test, n_train)
     repeat_diffs = folds.pivot_table(index="repeat", columns="method", values="macro_f1")["svm"] - folds.pivot_table(index="repeat", columns="method", values="macro_f1")[baseline]
-    # Hipotezės kriterijai: vidutinis pranašumas ≥0,02, bent 3 teigiami
-    # pakartojimai ir pataisyto intervalo apatinė riba virš nulio.
     hypothesis = {"baseline": baseline, "mean_difference": float(differences.mean()),
                   "corrected_95pct_ci": ci, "positive_repeats": int((repeat_diffs > 0).sum()),
                   "confirmed": bool(differences.mean() >= 0.02 and (repeat_diffs > 0).sum() >= 3 and ci[0] > 0)}
@@ -214,8 +188,6 @@ def save_outputs(out_dir, cfg, metadata, records, predictions, robustness, impor
     return summary, hypothesis
 
 
-# Po mokymo paleidžia atskirą rezultatų patikrą ir ataskaitos generavimą.
-# check=True sustabdo eigą, jei pagalbinis procesas nepavyksta.
 def postprocess(out_dir, cache_dir):
     """Vienos komandos darbo eiga baigiama nepriklausoma patikra ir ataskaita."""
     project = Path(__file__).resolve().parent
@@ -224,8 +196,6 @@ def postprocess(out_dir, cache_dir):
                         "--cache", str(cache_dir.resolve())], cwd=project, check=True)
 
 
-# Valdo visą CLI eksperimentą: argumentai → duomenys → skaidiniai → modeliai → diagnostika.
-# Pilnu režimu dar išmoko galutinį SVM visais duomenimis, išsaugo jį ir paleidžia auditą.
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", default="configs/main.yaml")
@@ -259,16 +229,13 @@ def main():
     for split_id, (repeat, fold, train, test) in enumerate(splits):
         X_train, X_test = X.iloc[train], X.iloc[test]
         y_train, y_test = y.iloc[train], y.iloc[test]
-        # Trikdžio masteliui naudojami tik mokymo duomenys, kad testas nenustatytų taisyklių.
         train_std = X_train.std(ddof=0).to_numpy()
-        # Deterministinė sėkla atkuriama iš pakartojimo ir dalies numerio.
         seed = cfg["seed"] + repeat * 100 + fold
         print(f"Split {split_id+1}/{len(splits)} (repeat={repeat}, fold={fold})", flush=True)
         for name in models:
             started = time.perf_counter()
             model, params = fit_model(name, X_train, y_train, cfg, seed, args.jobs, out_dir / "inner_search" / f"{split_id:02d}_{name}.csv")
             train_seconds = time.perf_counter() - started
-            # Prognozavimo trukmė matuojama atskirai nuo mokymo ir parametrų paieškos.
             predict_started = time.perf_counter()
             pred = model.predict(X_test)
             predict_seconds = time.perf_counter() - predict_started
@@ -289,16 +256,12 @@ def main():
                     altered = metrics(y_test, model.predict(changed))
                     missing_features.append({"split": split_id, "feature": feature,
                         **altered, "f1_drop": score["macro_f1"] - altered["macro_f1"]})
-                # Kraštinės reikšmės: už mokymo 5–95 procentilių intervalo.
-                # Tai diagnostinis apibrėžimas, ne automatinis klaidingo įrašo įrodymas.
                 lower, upper = X_train.quantile(.05), X_train.quantile(.95)
                 edge_counts = ((X_test < lower) | (X_test > upper)).sum(axis=1)
                 edge_records.extend({"split": split_id, "repeat": repeat, "row_index": int(i),
                     "edge_features": int(n), "error": bool(t != g)}
                     for i, n, t, g in zip(test, edge_counts, y_test, pred))
                 # Permutacija liečia tik bandymo dalį ir nepakeičia parinkto modelio.
-                # Vieno testo požymio reikšmės sumaišomos tarp objektų.
-                # Metrikos kritimas rodo modelio priklausomybę nuo požymio; tai ne priežastinis poveikis.
                 result = permutation_importance(model, X_test, y_test, scoring="f1_macro", n_repeats=3,
                                                 random_state=seed, n_jobs=1)
                 importances.extend({"split": split_id, "feature": feature, "drop_mean": float(value)}
@@ -312,8 +275,6 @@ def main():
     print("Hipoteze:", json.dumps(hypothesis, ensure_ascii=True))
     if not args.quick:
         # Diegiamas modelis išmokomas iš viso rinkinio, parinkus parametrus vidine CV.
-        # Šis modelis skirtas vėlesniems naujiems įrašams. Jo mokymo rinkinio
-        # rezultatas nelaikomas nepriklausomu testu; vertinimui naudojamos išorinės prognozės.
         final, params = fit_model("svm", X, y, cfg, cfg["seed"], args.jobs, out_dir / "inner_search" / "final_svm.csv")
         joblib.dump({"pipeline": final, "feature_names": list(X.columns), "labels": CLASSES,
                      "openml_md5": metadata["md5"], "params": params,

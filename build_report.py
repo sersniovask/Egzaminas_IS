@@ -16,6 +16,7 @@ from src.provenance import provenance, peak_rss_bytes
 from datetime import datetime, timezone
 
 
+# Iš baigto eksperimento failų sukuria lietuvišką Markdown ataskaitą ir diagnostiką.
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--results", default="results/main")

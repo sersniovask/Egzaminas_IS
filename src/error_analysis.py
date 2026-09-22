@@ -3,6 +3,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 
+# Sujungia prognozes su požymiais, išsaugo klaidų diagnostikos lenteles ir grafiką.
+# Grąžina Markdown eilučių sąrašą pagrindinei ataskaitai; tai aprašomoji analizė.
 def extend_report(root, X, predictions, importance):
     records = predictions.copy()
     records['error'] = records.true != records.predicted

@@ -10,6 +10,7 @@ from sklearn.model_selection import ParameterGrid
 from src.models import grid_for
 
 
+# Sudaro failų SHA256 manifestą, bendrą kodo identifikatorių ir Git revizijos informaciją.
 def provenance(project):
     project = Path(project).resolve()
     files = sorted([*project.glob('*.py'), *project.glob('src/*.py'),
@@ -31,6 +32,7 @@ def provenance(project):
             'git_error': git_error}
 
 
+# Suskaičiuoja planuojamus fit kvietimus: kandidatų CV, geriausių modelių refit ir galutinį SVM.
 def planned_fits(cfg):
     per_split = 2
     for name in ['svm', 'mlp', 'rbf', 'svm_linear', 'svm']:
@@ -39,6 +41,8 @@ def planned_fits(cfg):
     return per_split * cfg['outer_folds'] * len(cfg['outer_seeds']) + final
 
 
+# Grąžina dabartinio proceso didžiausią užregistruotą RAM kiekį baitais.
+# Operacinėse sistemose matavimo vienetai skiriasi, todėl rezultatas suvienodinamas.
 def peak_rss_bytes():
     # Windows pateikia tikrą proceso didžiausią working set nuo jo paleidimo.
     if os.name == 'nt':

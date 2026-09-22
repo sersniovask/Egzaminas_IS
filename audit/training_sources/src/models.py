@@ -18,40 +18,28 @@ from sklearn.svm import SVC
 class RBFNetwork(ClassifierMixin, BaseEstimator):
     """KMeans centrai -> Gauso RBF aktyvacijos -> Ridge išvesties sluoksnis."""
 
-    # Išsaugo hiperparametrus; šiame etape dar nesimoko.
-    # Centrai – paslėpti RBF vienetai, width – jų plotis, alpha – Ridge bauda.
     def __init__(self, n_centers=16, width=1.0, alpha=0.01, random_state=2026):
         self.n_centers = n_centers
         self.width = width
         self.alpha = alpha
         self.random_state = random_state
 
-    # Iš X ir y išmoksta centrus, Gauso aktyvacijų plotį ir išvesties svorius.
-    # Grąžina self, kaip reikalauja scikit-learn mokymo sąsaja.
     def fit(self, X, y):
         X = np.asarray(X, dtype=float)
-        # Klasės surikiuojamos; encoded saugo kiekvienos mokymo žymės skaitinį indeksą.
         self.classes_, encoded = np.unique(y, return_inverse=True)
-        # KMeans randa tipines mokymo objektų vietas požymių erdvėje – RBF centrus.
         self.centers_ = KMeans(n_clusters=self.n_centers, random_state=self.random_state, n_init=10).fit(X).cluster_centers_
-        # Atstumai tarp centrų nustato mastelį; ignoruojami nuliai, kad nebūtų dalybos iš nulio.
         squared = pdist(self.centers_, metric="sqeuclidean")
         median_sq = float(np.median(squared[squared > 0])) if np.any(squared > 0) else 1.0
         # phi_j(x)=exp(-gamma ||x-c_j||²), gamma=1/(2 * (width * sqrt(median_sq))²).
         self.gamma_ = 1.0 / (2.0 * self.width**2 * median_sq)
         activations = rbf_kernel(X, self.centers_, gamma=self.gamma_)
-        # One-hot tikslai: teisingos klasės stulpelyje 1, kituose 0.
         targets = np.eye(len(self.classes_))[encoded]
-        # Ridge išmoksta aktyvacijų svorius; alpha riboja didelius svorius ir persimokymą.
         self.output_ = Ridge(alpha=self.alpha).fit(activations, targets)
         return self
 
-    # Naujiems objektams grąžina po vieną Ridge balą kiekvienai klasei.
-    # Balai nėra kalibruotos tikimybės; centrai ir svoriai čia nebekeičiami.
     def decision_function(self, X):
         return self.output_.predict(rbf_kernel(np.asarray(X, dtype=float), self.centers_, gamma=self.gamma_))
 
-    # Kiekvienam objektui parenka didžiausio balo klasę ir grąžina tekstines žymes.
     def predict(self, X):
         return self.classes_[np.argmax(self.decision_function(X), axis=1)]
 
@@ -59,7 +47,6 @@ class RBFNetwork(ClassifierMixin, BaseEstimator):
 class EncodedMLP(ClassifierMixin, BaseEstimator):
     """MLP su skaitinėmis vidinės validacijos žymomis ir tekstine išvestimi."""
 
-    # Išsaugo MLP architektūrą, reguliarizaciją, mokymosi žingsnį ir sėklą.
     def __init__(self, hidden_layer_sizes=(32,), alpha=0.001, learning_rate_init=0.001,
                  random_state=2026):
         self.hidden_layer_sizes = hidden_layer_sizes
@@ -67,12 +54,8 @@ class EncodedMLP(ClassifierMixin, BaseEstimator):
         self.learning_rate_init = learning_rate_init
         self.random_state = random_state
 
-    # Tekstines klases užkoduoja sveikaisiais skaičiais ir išmoko MLP.
-    # Ankstyvasis stabdymas naudoja dalį į fit perduotų mokymo duomenų, ne išorinį testą.
     def fit(self, X, y):
-        # Klasės surikiuojamos; encoded saugo kiekvienos mokymo žymės skaitinį indeksą.
         self.classes_, encoded = np.unique(y, return_inverse=True)
-        # ReLU: h=max(0, zW+b). Adam atnaujina svorius; early_stopping stabdo pagal vidinę validaciją.
         self.network_ = MLPClassifier(hidden_layer_sizes=self.hidden_layer_sizes,
                                       alpha=self.alpha, learning_rate_init=self.learning_rate_init,
                                       activation="relu", solver="adam", early_stopping=True,
@@ -80,13 +63,10 @@ class EncodedMLP(ClassifierMixin, BaseEstimator):
         self.network_.fit(X, encoded)
         return self
 
-    # Grąžina naujų objektų prognozes, skaitinius klasės indeksus paversdama tekstu.
     def predict(self, X):
         return self.classes_[self.network_.predict(X)]
 
 
-# Pagal metodo pavadinimą sukuria dar nemokytą apdorojimo grandinę.
-# Eiga: trūkstamų reikšmių pildymas → standartizavimas (jei įjungtas) → modelis.
 def build_pipeline(name: str, seed: int, *, scaled=True):
     if name == "centroid":
         model = NearestCentroid(metric="euclidean", shrink_threshold=None)
@@ -105,15 +85,11 @@ def build_pipeline(name: str, seed: int, *, scaled=True):
     else:
         raise ValueError(name)
     # Imputer ir scaler išmoksta parametrus tik fit gautoje mokymo dalyje.
-    # Standartizavimas: z=(x−mokymo vidurkis)/mokymo SD.
-    # Testui taikomi tie patys išmokti parametrai, jie neperskaičiuojami.
     return Pipeline([("imputer", SimpleImputer(strategy="median")),
                      ("scaler", StandardScaler() if scaled else "passthrough"),
                      ("model", model)])
 
 
-# Iš konfigūracijos sudaro vidinėje CV tikrinamų hiperparametrų tinklelį.
-# Prefiksas model__ nurodo Pipeline žingsnį; baseline metodams grąžina None.
 def grid_for(name, cfg):
     if name == "svm":
         return {"model__C": cfg["svm_C"], "model__gamma": cfg["svm_gamma"]}

@@ -15,16 +15,19 @@ from sklearn.model_selection import StratifiedKFold
 
 from src.data import CLASSES, OPENML_MD5, load_vehicle
 from src.provenance import peak_rss_bytes
+from src.source_audit import verify_training_source
 
 METHODS = {"centroid", "knn", "svm", "mlp", "rbf", "svm_linear", "svm_unscaled"}
 
 
+# Atskirai suskaičiuoja TP, FP ir FN kiekvienai klasei ir grąžina Macro-F1 bei jautrumų vidurkį.
 def manual_scores(true, predicted):
     """Metrikos iš TP, FP ir FN, nenaudojant eksperimentinio metrikų kodo."""
     true = np.asarray(true)
     predicted = np.asarray(predicted)
     recalls, f1_values = [], []
     for label in CLASSES:
+        # TP – teisingai aptikta ši klasė; FP – klaidingai priskirta; FN – nepastebėta.
         tp = int(np.sum((true == label) & (predicted == label)))
         fp = int(np.sum((true != label) & (predicted == label)))
         fn = int(np.sum((true == label) & (predicted != label)))
@@ -33,6 +36,7 @@ def manual_scores(true, predicted):
     return float(np.mean(f1_values)), float(np.mean(recalls))
 
 
+# Nepriklausomai atkuria tikėtinus skaidinių indeksus iš išsaugotos konfigūracijos.
 def expected_splits(X, y, cfg):
     for repeat, seed in enumerate(cfg["outer_seeds"]):
         cv = StratifiedKFold(n_splits=cfg["outer_folds"], shuffle=True, random_state=seed)
@@ -40,6 +44,8 @@ def expected_splits(X, y, cfg):
             yield repeat, fold, train, test
 
 
+# Sutikrina duomenų tapatybę, prognozes, metrikas, skaidinius, modelį ir paieškos biudžetą.
+# Tik visoms patikroms praėjus įrašo verification.json su statusu passed.
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--results", default="results/main")
@@ -63,6 +69,7 @@ def main():
     split_list = list(expected_splits(X, y, cfg))
     assert len(split_list) == 50
     for split_id, (repeat, fold, train, test) in enumerate(split_list):
+        # Mokymo ir testo indeksų sankirta turi būti tuščia – objektas negali būti abiejose dalyse.
         assert not set(train) & set(test)
         for method in METHODS:
             rows = preds[(preds.split == split_id) & (preds.method == method)].sort_values("row_index")
@@ -111,6 +118,7 @@ def main():
     final = joblib.load(root / "final_svm.joblib")
     assert final["feature_names"] == list(X.columns)
     assert final["openml_md5"] == OPENML_MD5
+    # Funkcinė modelio įkėlimo patikra; šie įrašai nėra naujas nepriklausomas tikslumo testas.
     sample_predictions = final["pipeline"].predict(X.iloc[:3])
     assert len(sample_predictions) == 3 and set(sample_predictions) <= set(CLASSES)
     assert final["pipeline"].decision_function(X.iloc[:3]).shape == (3, 6)
@@ -136,7 +144,8 @@ def main():
     project = Path(__file__).resolve().parent
     for relative in ['run_experiment.py', 'src/data.py', 'src/models.py', 'configs/main.yaml']:
         key = next(k for k in provenance['file_sha256'] if k.replace('\\', '/') == relative)
-        assert hashlib.sha256((project / relative).read_bytes()).hexdigest() == provenance['file_sha256'][key]
+        # Originalus manifestas išlieka nepakeistas; dokumentuoti failai tikrinami prieš archyvą.
+        verify_training_source(project, relative, provenance['file_sha256'][key])
     fit_count = 100
     for split in range(50):
         for method, expected_candidates in [('svm',20), ('mlp',12), ('rbf',18), ('svm_linear',4), ('svm_unscaled',20)]:

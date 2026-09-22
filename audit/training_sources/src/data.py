@@ -15,15 +15,12 @@ OPENML_MD5 = "fbba18157b188f309d772f9ca4e578f5"
 CLASSES = ["bus", "opel", "saab", "van"]
 
 
-# Gauna duomenų podėlio aplanką; prireikus atsisiunčia ARFF failą.
-# Patikrina jo tapatybę ir schemą. Grąžina X (846 × 18 požymių), y (klases) ir metaduomenis.
 def load_vehicle(cache_dir: Path):
     cache_dir.mkdir(parents=True, exist_ok=True)
     path = cache_dir / "vehicle.arff"
     if not path.exists():
         # Tiesioginė oficialaus OpenML failo nuoroda; vietinė kopija leidžia pakartoti bandymą.
         urllib.request.urlretrieve(OPENML_URL, path)
-    # Kontrolinė suma apsaugo nuo kitos duomenų versijos ar sugadinto atsisiuntimo.
     digest = hashlib.md5(path.read_bytes()).hexdigest()
     if digest != OPENML_MD5:
         raise ValueError(f"OpenML failo MD5 neatitinka metaduomenų: {digest}")
@@ -31,14 +28,12 @@ def load_vehicle(cache_dir: Path):
     frame = pd.DataFrame(raw)
     if "Class" not in frame.columns:
         raise ValueError("Nėra tikslinio Class stulpelio")
-    # Tikslinė klasė pašalinama iš požymių, kad modelis negautų atsakymo kaip įvesties.
     y = frame.pop("Class").map(lambda v: v.decode() if isinstance(v, bytes) else str(v))
     X = frame.apply(pd.to_numeric, errors="raise")
     if X.shape != (846, 18) or sorted(y.unique()) != CLASSES:
         raise ValueError(f"Netikėta duomenų schema: {X.shape}, {sorted(y.unique())}")
     if not np.isfinite(X.to_numpy()).all():
         raise ValueError("Pradiniuose duomenyse yra NaN arba begalybė")
-    # Bendros statistikos skirtos aprašui; jos nenaudojamos CV imputavimui ar standartizavimui.
     metadata = {
         "source": OPENML_URL, "openml_id": 54, "version": 1,
         "md5": digest, "rows": len(X), "features": list(X.columns),
@@ -56,8 +51,6 @@ def load_vehicle(cache_dir: Path):
     return X, y, metadata
 
 
-# Gauna vieno naujo objekto požymių žodyną ir mokymo požymių tvarką.
-# Grąžina vienos eilutės lentelę; neteisingus pavadinimus ar begalybes atmeta.
 def validate_record(record: dict, feature_names: list[str]) -> pd.DataFrame:
     if set(record) != set(feature_names):
         raise ValueError("Įraše turi būti tiksliai tie patys 18 požymių pavadinimų")

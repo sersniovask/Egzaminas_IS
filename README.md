@@ -2,6 +2,14 @@
 
 Šis projektas įgyvendina Kirilo Šeršniovo PEPfm-26 egzamino užduotį ir kolokviumo planą. Įvestis yra 18 skaitinių silueto požymių, išvestis – `bus`, `opel`, `saab` arba `van`. Saulės elektrinės užklausa pateiktoje ekrano nuotraukoje yra kitos užduoties pavyzdys ir šiame projekte nenaudojama.
 
+## Rezultatų peržiūra JupyterLab
+
+Pradėkite nuo `00_REZULTATU_SANTRAUKA.ipynb`: čia vienoje vietoje pateiktos visų metodų metrikos, grafikai, SVM hipotezė ir septynių egzamino reikalavimų atitiktis.
+
+Kiekvienas `svm_alternatyva.ipynb`, `mlp_alternatyva.ipynb` ir `rbf_alternatyva.ipynb` dabar turi pagrindines metrikas, palyginimą su abiem baseline, klasių metrikas, painiavos matricą, dešimt klaidų pavyzdžių, atsparumo grafikus, rezultatų interpretaciją ir formulės ryšį su tikru kodu. SVM abliacija aiškiai pažymėta kaip bendro eksperimento dalis.
+
+Lentelės ir grafikai jau išsaugoti sąsiuvinių išvestyse. `Run → Run All Cells` tik atnaujina apžvalgą iš `results/main/`; mokymo blokas pagal nutylėjimą turi `RUN_TRAINING = False`. Mokymui iš naujo šį jungiklį reikia sąmoningai pakeisti. Sąsiuviniams sugeneruoti su išvestimis naudokite `python make_notebooks.py --execute` iš aplinkos, kurioje įdiegtas Jupyter. Generatorius išsaugo ankstesnių sąsiuvinių kopijas `results/notebook_backups/`.
+
 ## Paleidimas Windows aplinkoje
 
 Patikrinta su Python 3.10. Pagrindiniam eksperimentui nereikia Jupyter.

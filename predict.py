@@ -10,6 +10,8 @@ from src.data import validate_record
 LT = {"bus": "autobusas", "opel": "Opel", "saab": "Saab", "van": "furgonas"}
 
 
+# Perskaito vieną JSON įrašą, patikrina jo schemą ir pritaiko išsaugotą grandinę.
+# Išveda klasę, modelio versiją ir diagnostinius porinius balus; modelio nemoko.
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--model", default="results/main/final_svm.joblib")

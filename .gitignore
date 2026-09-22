@@ -6,3 +6,4 @@ data/
 results/*
 !results/main/
 .ipynb_checkpoints/
+.jupyter-run/

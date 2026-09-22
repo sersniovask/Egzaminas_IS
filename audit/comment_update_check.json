@@ -1,0 +1,20 @@
+{
+  "unchanged_python_ast": [
+    "build_report.py",
+    "make_notebooks.py",
+    "make_result_notebooks.py",
+    "predict.py",
+    "run_experiment.py",
+    "start_jupyter.py",
+    "src\\data.py",
+    "src\\error_analysis.py",
+    "src\\models.py",
+    "src\\notebook_report.py",
+    "src\\provenance.py",
+    "src\\summary_plots.py",
+    "src\\__init__.py"
+  ],
+  "tests_passed": 12,
+  "full_results_verification": "passed",
+  "note": "verify_results.py additionally permits comment-only changes through source_audit; original training manifest preserved"
+}
