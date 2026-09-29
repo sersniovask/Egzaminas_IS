@@ -1,0 +1,40 @@
+{
+  "training_rows": 846,
+  "classes": [
+    "bus",
+    "opel",
+    "saab",
+    "van"
+  ],
+  "feature_names": [
+    "COMPACTNESS",
+    "CIRCULARITY",
+    "DISTANCE_CIRCULARITY",
+    "RADIUS_RATIO",
+    "PR.AXIS_ASPECT_RATIO",
+    "MAX.LENGTH_ASPECT_RATIO",
+    "SCATTER_RATIO",
+    "ELONGATEDNESS",
+    "PR.AXIS_RECTANGULARITY",
+    "MAX.LENGTH_RECTANGULARITY",
+    "SCALED_VARIANCE_MAJOR",
+    "SCALED_VARIANCE_MINOR",
+    "SCALED_RADIUS_OF_GYRATION",
+    "SKEWNESS_ABOUT_MAJOR",
+    "SKEWNESS_ABOUT_MINOR",
+    "KURTOSIS_ABOUT_MAJOR",
+    "KURTOSIS_ABOUT_MINOR",
+    "HOLLOWS_RATIO"
+  ],
+  "data_md5": "fbba18157b188f309d772f9ca4e578f5",
+  "model_sha256": "8f2a4920575d309a4a25294bc8327459f9cf7f264e9adc61b37e4d30bcbe43f9",
+  "foundation_checkpoint_sha256": "cf8c519c01eaf1613ee91239006d57b1c806ff5f23ac1aeb1315ba1015210e49",
+  "foundation_checkpoint_source": "https://huggingface.co/Prior-Labs/TabPFN-v2-clf",
+  "tabpfn": "2.2.1",
+  "torch": "2.14.0+cpu",
+  "sklearn": "1.6.1",
+  "n_estimators": 4,
+  "trained_after_cross_validation": true,
+  "training_set_accuracy_not_reported_as_test_result": true,
+  "external_foundation_weights_required_on_load": true
+}

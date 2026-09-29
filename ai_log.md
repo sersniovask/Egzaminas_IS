@@ -1,5 +1,19 @@
 # AI naudojimo žurnalas
 
+## 2026-09-28 dėstytojo pastabų tyrimas
+
+Užklausa: perskaityti du dėstytojo laiškus, peržiūrėti naujesnę literatūrą, bandyti sumažinti Opel ir Saab klaidas, patikrinti parametrų parinkimą ir atnaujinti kolokviumo bei egzamino dokumentus.
+
+Priimta: 2024 m. Yang ir kt. tyrimo požymių atrankos klausimą tikrinti skaidria `SelectKBest` alternatyva, o ne teigti, kad atkartojome jų optimizatorių. 2024 m. Przybyła-Kasperek ir Marfo paskirstyto MLP darbas įtrauktas kaip pagrįsta alternatyva atitinkamam duomenų scenarijui, bet netaikytas vienai pilnai lentelei.
+
+Atmesta pirma modelio modifikacija: porinis Opel ir Saab specialistas sumažino bendrą Macro-F1 nuo 0,842 iki 0,831, abiejų automobilių F1 taip pat sumažėjo. Visi 50 testų išsaugoti; neigiamas rezultatas nepašalintas iš dokumentacijos.
+
+Priimta kaip tiriamasis variantas: ankstesnėje vidinėje paieškoje `C=100` laimėjo 48/50 kartų, todėl išbandytas platesnis SVM tinklelis su mokymo dalyje vykdoma požymių atranka. Macro-F1 0,852 prieš 0,842; Opel F1 0,736 prieš 0,716; Saab F1 0,747 prieš 0,721. Visais 50 kartų pasirinkti visi 18 požymių, taigi geresnis skaičius nepriskiriamas požymių mažinimui. Pataisytas skirtumo intervalas apima nulį. Aiškiai atmesta AI prielaida, kad didesnis vidurkis savaime įrodo stabilų pagerėjimą.
+
+Patikra: `verify_improvement.py` atskirai sutikrino 50 vienodų testavimo indeksų, 4230 kiekvieno varianto prognozių, tikrąsias klases ir skaidinių F1; patikrintas išsaugotas naujas modelis. Parametrų analizė sudaryta iš `inner_search/` ir `fold_metrics.csv`, o MLP epochų bei nuostolio diagnostikai parinktos konfigūracijos iš naujo apmokytos tik su atitinkamomis mokymo dalimis.
+
+Ribojimas: bandymai sugalvoti po pradinės išorinės patikros, todėl jie neturi nepriklausomo naujo testavimo rinkinio. Naujų ženklintų nuotraukų ar siluetų nebuvo, sintetinių pavyzdžių nepridėta. Giluminė saugaus realaus naudojimo išvada negalima.
+
 Data: 2026-09-20. Įrankis: Codex. Užduotis: pagal pateiktą egzamino dokumentą ir kolokviumo planą sukurti veikiantį, atkuriamą sprendimą.
 
 | Užklausa arba pasiūlymas | Sprendimas | Patikra |
@@ -54,4 +68,22 @@ Užklausa: kuo išsamiau paaiškinti funkcijas ir kodo blokus. Pridėti lietuvi�
 Aptikta prielaida: komentarai nepaveiks tikslios SHA256 patikros. Jie keičia failų baitus, todėl originalūs mokymo failai išsaugoti `audit/training_sources/`, o patikra papildyta originalo hash, AST ir vykdomų tokenų palyginimu. Pirminio mokymo manifesto perrašymas atmestas: jis turi identifikuoti realiai vykdytą kodą. Nauji testai patvirtina, kad komentarai leidžiami, algoritmo pakeitimas ir pakeistas archyvas atmetami.
 
 Patikra: dokumentuotų failų AST sutikrinti su ankstesnėmis versijomis, visi 12 techninių testų praėjo, pilnas 50 skaidinių ir 7 variantų rezultatų auditas praėjo. Keturi notebookai pakartotinai įvykdyti be modelių permokymo. Rezultatų CSV, pirminis manifestas ir galutinis modelis nepakeisti. Komentarai ir gidas skirti supratimui; gyvo gynimo atlikimo nepatvirtina.
+
+## 2026-09-28 ir 2026-09-29 papildomi automobilių klasių bandymai
+
+Naudotojo prašymu išbandytas dar platesnis SVM `C` tinklelis, ExtraTrees ansamblis ir pagal Hollmann ir kt. (2025) tyrimą pasirinktas TabPFN v2. Nė vienam naujam modeliui nepanaudotos atitinkamo išorinio testo žymos mokymui. SVM ir ExtraTrees hiperparametrai rinkti penkių dalių vidinėje patikroje. TabPFN naudoti iš anksto išmokyti oficialūs svoriai, 4 ansamblio įvertinimai ir tik to skaidinio mokymo duomenys. 50 skaidinių prognozės, metrikos ir skaidinių indeksai išsaugoti atskiruose JSON failuose; `verify_next_20260928.py` nepriklausomai patikrino po 4230 kiekvieno modelio prognozių.
+
+Rezultatai: ankstesnis platesnis SVM Macro-F1 0,852, dar platesnis SVM 0,849, ExtraTrees 0,755, TabPFN v2 0,869. TabPFN pagerino bendrą rezultatą, bet Opel–Saab tarpusavio klaidų buvo 525, palyginti su 522 ankstesnio SVM. Pripažinta, kad centrinė automobilių poros problema liko. 73 iš 81 nuolat klaidingų pradinio SVM įrašų yra Opel arba Saab; 72,6 % šių įrašų kitos klasės kaimynas yra arčiau negu savos klasės kaimynas standartizuotoje požymių erdvėje. Tai tik diagnostika, ne klaidingų žymų įrodymas.
+
+Visų naujų metodų palyginimas laikomas tiriamuoju dėl pakartotinio tų pačių išorinių testų naudojimo idėjoms rinkti. Nauji duomenys ar pradiniai siluetų vaizdai nebuvo gauti, todėl nekurti tariamai nepriklausomi sintetiniai objektai. Po vertinimo išsaugotas visais 846 įrašais pritaikytas TabPFN kandidatas ir patikrintas jo įkėlimas bei vieno įrašo prognozė. Atnaujinti kolokviumo planas ir egzamino ataskaita PDF formatu; jų naujų puslapių maketas patikrintas vaizduose.
+
+## 2026-09-29 paleidimo eigos patikslinimas
+
+Po naudotojo klausimo pastebėta, kad papildomų bandymų kodas ir `predict_tabpfn.py` buvo pridėti, bet `START.cmd` bei senoji greito paleidimo instrukcija vis dar rodė tik pradinį eksperimentą. Meniu papildytas išsaugotų naujų rezultatų patikra ir TabPFN prognozavimu. Ankstesnė 2 pasirinkimo eiga aiškiai pavadinta istoriniu pagrindiniu bandymu. `predict_tabpfn.py` prieš įkeldamas modelį tikrina jo SHA-256 pagal metaduomenis. Atnaujinti README, `PALEIDIMAS_IR_GITHUB.md`, `KODO_GIDAS.md` ir `.gitignore`; pastarasis dabar įtraukia naujų bandymų rezultatus, bet ne virtualią aplinką. Pirminis `run_experiment.py` nekeistas, kad istorinis eksperimentas išliktų atkuriamas.
+
+## 2026-09-29 pokalbių istorijos ir ataskaitos auditas
+
+Naudotojui paprašius peržiūrėti istoriją ir pateikimo grafikus, aptikta, kad `AI_POKALBIU_ISTORIJA.md` baigėsi 2026-09-22. Pridėta aiškiai pažymėta rugsėjo 28-29 d. užklausų ir veiksmų santrauka; ji nėra pristatoma kaip pažodinis nematomų pranešimų eksportas. Ataskaitos viršelyje ankstesnė išvada apie platesnį SVM buvo nebepakankama, nes vėliau išbandytas TabPFN v2. Viršelis atnaujintas pagal išsaugotus rezultatus, atskiriant bendrą Macro-F1 pagerėjimą nuo neišspręstos Opel-Saab painiavos.
+
+B priedo lentelė papildyta atmesto Opel-Saab specialisto rezultatu. Iš jau išsaugotų 50 išorinių testų prognozių sukurti du nauji grafikai: poriniai trijų naujų modelių Macro-F1 skirtumai prieš ankstesnį platesnį SVM ir dviejų modelių painiavos matricų palyginimas. Ankstesni grafikai palikti, nes jie vaizduoja kitus klausimus: pradinį metodų palyginimą, požymių jautrumą, atsparumą ir pradinę klaidų struktūrą. Nė vienas modelis šiame audite nepermokytas, eksperimentų rezultatų failai nekeisti. Vizualizavimo kodas: `build_further_charts.py`; PDF sudarymo kodas: `build_exam_pdf.py` ir `build_further_exam_pdf.py`.
 

@@ -1,5 +1,11 @@
 # Koliokviumo plano patikslinimai
 
+## 2026-09-28 tyrimo strategijos redakcija
+
+Po dėstytojo grįžtamojo ryšio peržiūrėti du 2024 m. tyrimai su Vehicle Silhouettes duomenimis, patikrintas jų tinkamumas konkrečiai 18 požymių ir keturių klasių užduočiai. Atnaujintas pilnas kolokviumo dokumentas: `Kirilas_Sersniovas_Kolokviumo_planas_atnaujintas_2026-09-28.docx`. Tiriamieji bandymai ir jų ribos pateikti `ATNAUJINIMAS_2026-09-28.md`.
+
+Ši redakcija parengta jau žinant pradinį 50 išorinių skaidinių rezultatą. Jos negalima vadinti iš anksto užregistruota pradine hipoteze. Neigiamas Opel–Saab specialisto rezultatas išsaugotas. Platesnės paieškos SVM rodo nedidelį tiriamąjį pagerėjimą, tačiau porinio skirtumo intervalas apima nulį ir nėra naujo nepriklausomo duomenų rinkinio.
+
 2026-09-21, užregistruota prieš pakartotinį visą eksperimentą.
 
 Ankstesnis eksperimentas sunaudojo 22 701 modelio pritaikymą. Kad naujas paleidimas tilptų į plane nustatytą 20 000 ribą, pašalinama vidurinė MLP alpha reikšmė 0,001 ir didžiausias RBF pločio daugiklis 2. Lieka abi reguliarizacijos diapazono kraštinės, visos MLP architektūros ir visi RBF centrų skaičiai. Ši taisyklė mažina kandidatų skaičių pagal tinklelio sandarą, ne pagal atskirų išorinių skaidinių klaidas. Ankstesni rezultatai jau žinomi, todėl šio patikslinimo negalima pristatyti kaip pradinio, dar nematant duomenų užregistruoto plano.

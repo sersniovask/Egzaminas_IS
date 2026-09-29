@@ -1,9 +1,15 @@
 .venv/
+.venv_tabpfn/
 __pycache__/
 .pytest_cache/
 .matplotlib/
 data/
 results/*
 !results/main/
+!results/further_20260928/
+!results/wide_svm_20260928/
+!results/improvement_20260928/
+!results/training_audit_20260928/
 .ipynb_checkpoints/
 .jupyter-run/
+tmp/

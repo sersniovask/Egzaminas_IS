@@ -1,5 +1,35 @@
 # Transporto priemonių siluetų klasifikavimas
 
+## Dabartinis paleidimas
+
+`START.cmd` meniu dabar turi keturis pasirinkimus: **1** atidaro JupyterLab, **2** pakartoja tik istorinį `results/main/` eksperimentą, **3** iš naujo patikrina išsaugotus papildomų bandymų rezultatus jų nepermokydamas, **4** klasifikuoja vieną naują 18 požymių JSON įrašą su tiriamuoju TabPFN v2 modeliu. Pasirinkimas 4 paprašo įrašo failo kelio. Komandinėje eilutėje tas pats veiksmas:
+
+```cmd
+.\START.cmd --predict-tabpfn "C:\kelias\mano_irasas.json"
+.\START.cmd --verify-further
+.\START.cmd --check-tabpfn
+```
+
+Šiame kompiuteryje 4 pasirinkimas naudoja jau įdiegtą atskirą TabPFN aplinką `C:\Users\sersn\Documents\ChatGPT\IS Egzaminas\.venv_tabpfn`. Jei jos nėra, sukuriama projekto `.venv_tabpfn` ir įdiegiamos `requirements_tabpfn_v2_lock.txt` priklausomybės; pirmam modeliui įkelti gali reikėti atsisiųsti oficialius svorius. 2 pasirinkimas TabPFN eksperimento nepakartoja. Naujausi dokumentai yra `Egzamino_ataskaita_papildyti_bandymai_2026-09-28.pdf` ir `Kirilas_Sersniovas_Kolokviumo_planas_papildyti_bandymai_2026-09-28.pdf`.
+
+Jei reikia **tęsti nutrūkusį papildomų modelių mokymą**, projekto aplanke vykdykite šias komandas. Baigti skaidiniai pagal nutylėjimą praleidžiami, todėl esami įrodymai neperrašomi. Šiame kompiuteryje TabPFN Python kelias yra `C:\Users\sersn\Documents\ChatGPT\IS Egzaminas\.venv_tabpfn\Scripts\python.exe`; jei naudojate vietinę projekto aplinką, pakeiskite jį į `.\.venv_tabpfn\Scripts\python.exe`.
+
+```powershell
+.\.venv\Scripts\python.exe experiment_next_20260928.py svm_extended --max-splits 50
+.\.venv\Scripts\python.exe experiment_next_20260928.py extra_trees --max-splits 50
+& 'C:\Users\sersn\Documents\ChatGPT\IS Egzaminas\.venv_tabpfn\Scripts\python.exe' experiment_next_20260928.py tabpfn_v2 --max-splits 50
+.\.venv\Scripts\python.exe summarize_next_20260928.py
+.\START.cmd --verify-further
+```
+
+Norint viską perskaičiuoti nuo nulio, pirmiausia reikia atskiros projekto kopijos; `--no-resume` perrašytų esamus skaidinių kontrolinius taškus. Dabartiniai pateikimo rezultatai jau patikrinti, todėl įprastam paleidimui pakanka `START.cmd` 3 arba 4 pasirinkimo.
+
+## 2026-09-28 atnaujinimas
+
+Po dėstytojo pastabų atlikta naujesnės literatūros peržiūra, Opel ir Saab klaidų gerinimo bandymai, parametrų bei MLP mokymo kokybės auditas. Visą eigą, įskaitant nepavykusį bandymą, skaitinį metrikų pavyzdį ir pakartojimo komandas pateikia [ATNAUJINIMAS_2026-09-28.md](ATNAUJINIMAS_2026-09-28.md). Atnaujinta pateikimo ataskaita yra `Egzamino_ataskaita_atnaujinta_2026-09-28.pdf`, kolokviumo planas – `Kirilas_Sersniovas_Kolokviumo_planas_atnaujintas_2026-09-28.docx`.
+
+Pradinis `results/main/` išsaugotas nepakeistas. Tiriamasis platesnės paieškos SVM pasiekė 0,852 Macro-F1 prieš pradinį 0,842; Opel F1 0,736 prieš 0,716 ir Saab F1 0,747 prieš 0,721. Kadangi naujos idėjos buvo pasirinktos jau matant pradinį testą ir skirtumo intervalas apima nulį, tai preliminarus, nepriklausomai dar nepatvirtintas pagerėjimas. `predict_updated.py` leidžia išbandyti šį variantą; senasis `predict.py` toliau naudoja pradinį modelį.
+
 Šis projektas įgyvendina Kirilo Šeršniovo PEPfm-26 egzamino užduotį ir kolokviumo planą. Įvestis yra 18 skaitinių silueto požymių, išvestis – `bus`, `opel`, `saab` arba `van`. Saulės elektrinės užklausa pateiktoje ekrano nuotraukoje yra kitos užduoties pavyzdys ir šiame projekte nenaudojama.
 
 ## Rezultatų peržiūra JupyterLab
@@ -45,13 +75,13 @@ Pagrindinė komanda automatiškai vykdo `verify_results.py` ir `build_report.py`
 
 ## Nematytas įrašas gyvo gynimo metu
 
-Gavus dėstytojo 18 požymių įrašą, išsaugokite JSON objektą su tiksliais `data_metadata.json` esančiais požymių pavadinimais ir vykdykite:
+Gavus dėstytojo 18 požymių įrašą, išsaugokite JSON objektą su tiksliais `data_metadata.json` esančiais požymių pavadinimais. Tiriamuoju TabPFN modeliu prognozuokite per `START.cmd` 4 pasirinkimą arba `--predict-tabpfn` komandą aukščiau. Jei reikia pademonstruoti pirminį egzamino SVM, vykdykite:
 
 ```powershell
 .\.venv\Scripts\python.exe predict.py --input unseen.json
 ```
 
-Schema tikrinama, trūkstamoms reikšmėms taikomas mokymo duomenų medianų imputatorius. Mažo pakeitimo gynimo metu pavyzdys: `src/models.py` pakeisti kNN `n_neighbors=5` į `7` ir paleisti `--quick` bandymą atskirame `results/defense_demo` kataloge. Šis bandymas būtų demonstracija, o ne galutinio 50 skaidinių palyginimo pakaitalas. Kitas variantas – prie išsaugotų prognozių pridėti vienos klasės jautrumo metriką. Gynimo vertinimas priklauso nuo studento paaiškinimo ir realiai pateikto nematyto bandymo, todėl jo iš anksto atlikti negalima.
+Abu prognozavimo scenarijai tikrina 18 požymių schemą. Pirminio SVM grandinėje trūkstamos reikšmės pildomos išmoktomis mokymo duomenų medianomis; TabPFN eiga atskira. Mažo pakeitimo gynimo metu pavyzdys: `src/models.py` pakeisti kNN `n_neighbors=5` į `7` ir paleisti `--quick` bandymą atskirame `results/defense_demo` kataloge. Šis bandymas būtų demonstracija, o ne galutinio 50 skaidinių palyginimo pakaitalas. Gynimo vertinimas priklauso nuo studento paaiškinimo ir realiai pateikto nematyto bandymo, todėl jo iš anksto atlikti negalima.
 
 ## Ribos
 
@@ -81,3 +111,13 @@ Testai vykdomi projekto aplanke: `python -m pytest tests -q`. Sąsiuviniams papi
 Papildomai `resources.json` pateikiama konservatyvi visos eigos RAM viršutinė riba: mokymo proceso pikas ir didesnis iš paeiliui vykdytų patikros bei ataskaitos procesų pikų. Taip vertinama ir pagalbinių procesų atmintis.
 
 Pateikimo versijai sukurta vietinė projekto Git saugykla. Jos revizija įrašyta `results/main/report_provenance.json` po galutinio ataskaitos atnaujinimo. Šio pakartotinio mokymo pradžioje revizijos dar nebuvo, todėl pradinis `provenance.json` sąžiningai palieka null; modelio mokymo failus patvirtina jų pradinės kontrolinės sumos. Kitų paleidimų pradžioje Git revizija jau bus registruojama automatiškai.
+
+## 2026-09-29 papildomi tiriamieji bandymai
+
+Po ankstesnio platesnio SVM išbandyti trys nauji variantai ant tų pačių 50 išorinių skaidinių. Išorinis Macro-F1: ankstesnis platesnis SVM **0,852**, dar platesnis SVM (`C` iki 10000) **0,849**, ExtraTrees **0,755**, TabPFN v2 **0,869**. TabPFN Opel ir Saab F1 atitinkamai **0,745** ir **0,752**, tačiau jų tarpusavio supainiojimų **525**, palyginti su **522** ankstesnio SVM. Taigi bendras pagerėjimas neišsprendė dviejų automobilių atskyrimo problemos. TabPFN porinis Macro-F1 pokytis +0,017; apytikslis pataisytas 95 % intervalas [−0,011; +0,045] apima nulį. Visi palyginimai tiriamieji, nes ankstesnių tų pačių testų rezultatai jau buvo matyti.
+
+2026-09-29 peržiūrint pateikimą aptikta, kad pokalbių istorija baigėsi 2026-09-22, o trys nauji bandymai PDF buvo aprašyti tik lentele. `AI_POKALBIU_ISTORIJA.md` papildyta aiškiai pažymėta vėlesnių užklausų santrauka. Naujausios egzamino ataskaitos B priede dabar yra visų bandymų, įskaitant atmestą Opel-Saab specialistą, lentelė ir du grafikai: poriniai 50 išorinių testų Macro-F1 skirtumai bei platesnio SVM ir TabPFN painiavos matricos. Grafikai kuriami iš išsaugotų testavimo rezultatų komanda `python build_further_charts.py` pagrindinėje `.venv` aplinkoje, tada `python build_exam_pdf.py` ir `python build_further_exam_pdf.py` PDF aplinkoje su `reportlab` ir `pypdf`. Modelių permokyti nereikia. Galutinis PDF: `Egzamino_ataskaita_papildyti_bandymai_2026-09-28.pdf`.
+
+Kiekvienas baigtas skaidinys išsaugotas `results/further_20260928/<modelis>/splits/NN.json`; ten yra testų indeksai, žymos, prognozės, parametrai ir trukmė. `summarize_next_20260928.py` sudaro suvestines, o `verify_next_20260928.py` patvirtina visus 50 kiekvieno metodo išorinių testų ir po 4230 prognozių. Papildoma kaimynų diagnostika `results/further_20260928/diagnosis/` yra tik aprašomoji ir mokymui nenaudota. Nauji PDF: `Egzamino_ataskaita_papildyti_bandymai_2026-09-28.pdf` ir `Kirilas_Sersniovas_Kolokviumo_planas_papildyti_bandymai_2026-09-28.pdf`.
+
+Pagrindinei aplinkai pakanka `requirements.txt`. TabPFN v2 vykdomas atskiroje aplinkoje, kurios paketai užfiksuoti `requirements_tabpfn_v2_lock.txt`. Jis naudoja iš anksto išmokytus oficialius svorius, saugomus `%APPDATA%\tabpfn\`. Po kryžminės patikros visais 846 įrašais pritaikytas kandidatas išsaugotas `results/further_20260928/tabpfn_v2/final_tabpfn_v2.tabpfn_fit`; jo veikimą su tiksliai 18 požymių JSON įrašu galima patikrinti komanda `python predict_tabpfn.py --input unseen.json` iš TabPFN aplinkos. Jo mokymo įrašų prognozės nėra testavimo rodiklis. Įdiegimo ir tęstinumo komandos pateiktos `TESTINIO_EKSPERIMENTO_TESIMAS_2026-09-28.md`.

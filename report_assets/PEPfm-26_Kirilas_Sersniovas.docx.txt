@@ -1,0 +1,108 @@
+# PEPfm-26_Kirilas_Sersniovas.docx
+[Normal] Intelektualiosios sistemos
+[Normal] Individuali 2026–2027 m. užduotis
+[TABLE]
+Studentas | Kirilas Šeršniovas
+Grupė | PEPfm-26
+[/TABLE]
+[Heading 1] Transporto priemonių siluetų klasifikavimas
+[Normal] Vaizdo analizės prototipas turi pagal iš silueto apskaičiuotus geometrinius požymius nustatyti transporto priemonės tipą.
+[Heading 2] Duomenys ir sprendimo tikslas
+[List Bullet] Siūlomas viešas duomenų rinkinys: OpenML Vehicle, https://www.openml.org/d/54
+[List Bullet] Prognozuojamas rezultatas: Daugiaklasis transporto priemonės tipas.
+[List Bullet] Privalomas paprastas atskaitos metodas: kNN ir artimiausių centroidų bazė.
+[List Bullet] Svarstytini intelektualieji metodai: SVM, MLP, RBF tinklas, SOM. Galima pasirinkti kitus metodus, jei pasirinkimas pagrįstas literatūra ir eksperimentu.
+[List Bullet] Pagrindinės vertinimo kryptys: Macro-F1, balanced accuracy ir painiavos matrica.
+[List Bullet] Duomenų skaidymo reikalavimas: Kartotinis stratifikuotas kryžminis vertinimas.
+[List Bullet] Svarbiausias probleminis aspektas: Maža imtis ir persidengiančios klasės.
+[Heading 1] Kolokviumo dalis
+[Normal] Kolokviumui reikia parengti įgyvendinimo planą. Kodo ir galutinių rezultatų dar nereikalaujama, tačiau planas turi būti pakankamai konkretus, kad pagal jį kitas programuotojas galėtų pradėti darbą.
+[List Bullet] Suformuluoti problemą, techninį uždavinį ir praktinę sprendimo vertę. Įvardyti neaiškumus, apribojimus ir klaidų kainą.
+[List Bullet] Išskaidyti sprendimą į duomenų gavimo, paruošimo, modelio mokymo, vertinimo ir naudojimo etapus. Aiškiai aprašyti įvestį ir išvestį.
+[List Bullet] Pateikti 2–4 galimus intelektualiuosius metodus ir paprastą baseline. Kiekvieno metodo tinkamumą pagrįsti patikrintais pirminiais šaltiniais; pateikti DOI arba stabilias nuorodas.
+[List Bullet] Pasirinkti pagrindinį metodą ir suformuluoti patikrinamą hipotezę, kuo bei kokiomis sąlygomis jis turėtų pranokti baseline.
+[List Bullet] Pateikti pagrindines pasirinkto modelio formules arba taisykles, paaiškinti kintamuosius ir susieti jas su planuojamais programos moduliais.
+[List Bullet] Iš anksto aprašyti duomenų skaidymą, preprocessing, metrikas, abliaciją, klaidų analizę, skaičiavimo biudžetą ir didžiausias grėsmes išvadų galiojimui.
+[List Bullet] Pateikti AI naudojimo planą: kam AI bus naudojamas, kaip bus tikrinamos citatos, formulės, kodas ir rezultatai.
+[Heading 1] Galutinio egzamino dalis
+[Normal] Galutiniam egzaminui reikia pateikti veikiantį ir atkuriamą sprendimą bei įrodymus, leidžiančius įvertinti jo ribas.
+[List Bullet] Įgyvendinti duomenų paruošimo grandinę, baseline ir bent du intelektualiuosius metodus. Bent vienam modeliui parodyti formulės ar taisyklės ryšį su konkrečia kodo vieta.
+[List Bullet] Palyginti metodus tuo pačiu duomenų skaidymu ir tomis pačiomis metrikomis. Hiperparametrų parinkimui nenaudoti galutinio testo.
+[List Bullet] Atlikti bent vieną abliaciją arba požymių jautrumo bandymą ir bent vieną atsparumo bandymą: triukšmui, trūkstamiems duomenims, laiko ar grupės poslinkiui.
+[List Bullet] Pateikti rezultatų lentelę, tinkamą grafiką, klaidų pavyzdžius ir paaiškinti, kodėl pasirinktas metodas laimėjo arba nelaimėjo. Neigiamas rezultatas priimtinas, jei eksperimentas korektiškas.
+[List Bullet] Pateikti paleidimo instrukciją, priklausomybių sąrašą, fiksuotas atsitiktines sėklas ir vieną komandą pagrindiniam eksperimentui pakartoti. Duomenų failų kopijų teikti nereikia, jei yra atsisiuntimo instrukcija.
+[List Bullet] Pateikti AI naudojimo žurnalą: svarbiausios užklausos, priimti ir atmesti pasiūlymai, bent dvi aptiktos AI klaidos arba nepatikrintos prielaidos ir jų patikros būdas.
+[List Bullet] Gyvo gynimo metu paaiškinti pasirinktą formulę bei kodą, paleisti dėstytojo pateiktą nematytą bandymą ir atlikti nedidelį modelio, metrikos ar duomenų apdorojimo pakeitimą.
+[Heading 1] Kolokviumo vertinimas
+[Normal] Kolokviumas vertinamas 10 balų skale. Surinkti balai tiesiogiai sudaro 10 % galutinio dalyko pažymio. Kolokviume vertinamas įgyvendinimo planas; veikiantis kodas ir galutiniai eksperimentų rezultatai dar nereikalingi.
+[TABLE]
+Vertinama kolokviumo dalis | Balai
+Problemos formulavimas, apribojimai ir klaidų kaina | 2
+Alternatyvūs metodai, baseline ir literatūros pagrindimas | 2
+Įvestis, išvestis, formulės arba taisyklės ir būsimo kodo struktūra | 2
+Duomenų skaidymo, metrikų, eksperimentų ir rizikų planas | 3
+AI naudojimo ir pateiktos informacijos tikrinimo planas | 1
+[/TABLE]
+[Heading 1] Galutinio egzamino vertinimas
+[Normal] Galutinio egzamino rezultatas vertinamas 90 balų skale ir sudaro 90 % galutinio dalyko pažymio.
+[TABLE]
+Vertinama galutinio egzamino dalis | Balai
+Baseline, duomenų grandinė ir atkuriamumas | 10
+Bent dviejų intelektualiųjų metodų įgyvendinimas | 20
+Eksperimento korektiškumas ir vienodos palyginimo sąlygos | 20
+Rezultatai, abliacija, atsparumo bandymas ir klaidų analizė | 15
+Sprendimo ribos, rizikos ir praktinis tinkamumas | 10
+AI naudojimo auditas | 5
+Gyvas gynimas, nematytas testas ir nedidelis pakeitimas | 10
+[/TABLE]
+[Normal] Galutinis dalyko rezultatas (%) = kolokviumo balai + egzamino balai. Didžiausias rezultatas: 10 + 90 = 100 balų.
+[Normal] AI įrankius naudoti leidžiama. AI sugeneruotas tekstas, citata ar rezultatas savaime nėra įrodymas. Studentas atsako už duomenų kilmę, kodo veikimą, šaltinių tikrumą ir pateiktas išvadas.
+[Normal] Intelligent Systems
+[Normal] Individual assignment for 2026–2027
+[Normal] Student: Kirilas Šeršniovas    Group: PEPfm-26
+[Heading 1] Vehicle silhouette classification
+[Normal] Classify a vehicle type from geometric silhouette features. Compare k-nearest neighbours and a nearest-centroid baseline with an SVM, MLP, RBF network or SOM-supported approach. Use repeated stratified cross-validation. Report macro-F1, balanced accuracy and a confusion matrix, and discuss overlapping classes and uncertainty from the small sample.
+[Heading 2] Dataset
+[Normal] OpenML Vehicle, https://www.openml.org/d/54
+[Heading 1] Colloquium deliverable
+[Normal] Prepare an implementation plan. Final code and results are not required yet, but the plan must be specific enough for another developer to begin the implementation.
+[List Bullet] Formulate the practical problem, technical task and expected value. Identify uncertainties, constraints and the cost of different errors.
+[List Bullet] Break the solution into data acquisition, preprocessing, model training, evaluation and use. Define the input and output precisely.
+[List Bullet] Present two to four possible intelligent methods and a simple baseline. Justify every method with verified primary sources and provide a DOI or stable link.
+[List Bullet] Select the main method and state a testable hypothesis describing when and why it should outperform the baseline.
+[List Bullet] Give the main equations or rules of the selected model, explain every variable and map them to planned software modules.
+[List Bullet] Define the data split, preprocessing, metrics, ablation, error analysis, computation budget and the main threats to validity before implementation.
+[List Bullet] State how AI tools will be used and how citations, equations, code and results will be checked.
+[Heading 1] Final examination deliverable
+[Normal] Submit a working and reproducible solution together with evidence that makes its performance and limitations possible to assess.
+[List Bullet] Implement the data pipeline, the baseline and at least two intelligent methods. For at least one model, connect the equations or rules to a specific part of the code.
+[List Bullet] Compare all methods using the same data split and metrics. Do not use the final test set for hyperparameter selection.
+[List Bullet] Perform at least one ablation or feature-sensitivity experiment and at least one robustness test involving noise, missing data, time shift or group shift.
+[List Bullet] Provide a results table, an appropriate figure and examples of errors. Explain why the selected method did or did not win. A negative result is acceptable when the experiment is correct.
+[List Bullet] Provide execution instructions, dependencies, fixed random seeds and one command that reproduces the main experiment. Dataset files need not be submitted when reproducible download instructions are provided.
+[List Bullet] Provide an AI-use log containing the most important prompts, accepted and rejected suggestions, and at least two AI errors or unchecked assumptions together with the verification performed.
+[List Bullet] During the live defence, explain a selected equation and the corresponding code, run an unseen test supplied by the lecturer and make a small change to the model, metric or preprocessing.
+[Heading 1] Colloquium assessment
+[Normal] The colloquium is assessed on a 10-point scale. The points contribute directly to 10% of the final course grade. The colloquium assesses the implementation plan; working code and final experimental results are not yet required.
+[TABLE]
+Assessed colloquium component | Points
+Problem formulation, constraints and cost of errors | 2
+Alternative methods, baseline and literature justification | 2
+Input, output, equations or rules, and planned code structure | 2
+Plan for data splitting, metrics, experiments and risks | 3
+Plan for AI use and verification of generated information | 1
+[/TABLE]
+[Heading 1] Final examination assessment
+[Normal] The final examination is assessed on a 90-point scale and contributes 90% of the final course grade.
+[TABLE]
+Assessed final examination component | Points
+Baseline, data pipeline and reproducibility | 10
+Implementation of at least two intelligent methods | 20
+Experimental validity and equal comparison conditions | 20
+Results, ablation, robustness testing and error analysis | 15
+Solution limitations, risks and practical suitability | 10
+Audit of AI use | 5
+Live defence, unseen test and a small modification | 10
+[/TABLE]
+[Normal] Final course result (%) = colloquium points + final examination points. Maximum result: 10 + 90 = 100 points.
+[Normal] The use of AI tools is allowed. AI-generated text, citations or results are not evidence by themselves. The student remains responsible for dataset provenance, source validity, code execution and every reported conclusion.

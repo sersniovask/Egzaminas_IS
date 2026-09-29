@@ -8,7 +8,8 @@
 4. `perturbed_scores` ir SVM diagnostikos blokas parodo atsparumą bei požymių jautrumą.
 5. `src/notebook_report.py` ir `src/summary_plots.py` iš jau išsaugotų rezultatų sukuria lenteles ir grafikus.
 6. `verify_results.py` nepriklausomai perskaičiuoja metrikas ir tikrina įrodymų vientisumą.
-7. `predict.py` pritaiko išsaugotą galutinį modelį vienam naujam JSON įrašui.
+7. `predict.py` pritaiko pradinį SVM, `predict_updated.py` - ankstesnį platesnį SVM, o `predict_tabpfn.py` - naujausią tiriamąjį TabPFN v2 vienam naujam JSON įrašui.
+8. `experiment_next_20260928.py` saugo naujų modelių kiekvieno išorinio skaidinio prognozes; `summarize_next_20260928.py` ir `verify_next_20260928.py` jas perskaičiuoja ir patikrina. Šis etapas nėra pirminio `run_experiment.py` dalis.
 
 ## Terminai, kuriuos verta mokėti paaiškinti
 
@@ -40,11 +41,13 @@ RBF tinklas taip pat naudoja Gauso funkcijas, bet yra kitas modelis: `RBFNetwork
 
 ## Komandos projekto aplanke
 
-- Visi eksperimentai: `python run_experiment.py --config configs/main.yaml`
+- Pradinis eksperimentas: `python run_experiment.py --config configs/main.yaml`
+- Papildomų bandymų patikra be mokymo: `.\START.cmd --verify-further`
 - Rezultatų auditas: `python verify_results.py`
 - Techniniai testai: `python -m pytest tests -q`
 - Tik santraukos grafikai: `python make_result_notebooks.py --overview-only --execute`
-- Naujas įrašas: `python predict.py --input mano_irasas.json`
+- Naujas įrašas su TabPFN v2: `.\START.cmd --predict-tabpfn mano_irasas.json`
+- Naujas įrašas su pradiniu SVM: `python predict.py --input mano_irasas.json`
 
 ## Komentarai ir atkuriamumas
 

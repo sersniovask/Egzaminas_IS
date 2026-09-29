@@ -1,0 +1,17 @@
+{
+  "data_md5": "fbba18157b188f309d772f9ca4e578f5",
+  "models": {
+    "svm_extended": {
+      "verified_splits": 50,
+      "verified_predictions": 4230
+    },
+    "extra_trees": {
+      "verified_splits": 50,
+      "verified_predictions": 4230
+    },
+    "tabpfn_v2": {
+      "verified_splits": 50,
+      "verified_predictions": 4230
+    }
+  }
+}

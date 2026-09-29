@@ -1,0 +1,120 @@
+1/50: 0.860 -> 0.836; {'model__C': 1000, 'model__gamma': 0.01, 'select__k': 18}
+2/50: 0.786 -> 0.788; {'model__C': 1000, 'model__gamma': 0.003, 'select__k': 18}
+3/50: 0.894 -> 0.894; {'model__C': 1000, 'model__gamma': 0.01, 'select__k': 18}
+4/50: 0.821 -> 0.857; {'model__C': 100, 'model__gamma': 0.03, 'select__k': 18}
+5/50: 0.829 -> 0.805; {'model__C': 1000, 'model__gamma': 0.01, 'select__k': 18}
+6/50: 0.827 -> 0.814; {'model__C': 1000, 'model__gamma': 0.01, 'select__k': 18}
+7/50: 0.880 -> 0.893; {'model__C': 1000, 'model__gamma': 0.003, 'select__k': 18}
+8/50: 0.834 -> 0.834; {'model__C': 1000, 'model__gamma': 0.03, 'select__k': 18}
+9/50: 0.840 -> 0.855; {'model__C': 1000, 'model__gamma': 0.01, 'select__k': 18}
+10/50: 0.823 -> 0.860; {'model__C': 1000, 'model__gamma': 0.01, 'select__k': 18}
+11/50: 0.860 -> 0.857; {'model__C': 1000, 'model__gamma': 0.01, 'select__k': 18}
+12/50: 0.858 -> 0.858; {'model__C': 100, 'model__gamma': 0.01, 'select__k': 18}
+13/50: 0.821 -> 0.819; {'model__C': 100, 'model__gamma': 0.03, 'select__k': 18}
+14/50: 0.870 -> 0.873; {'model__C': 1000, 'model__gamma': 0.01, 'select__k': 18}
+15/50: 0.825 -> 0.873; {'model__C': 1000, 'model__gamma': 0.03, 'select__k': 18}
+16/50: 0.840 -> 0.813; {'model__C': 1000, 'model__gamma': 0.01, 'select__k': 18}
+17/50: 0.843 -> 0.843; {'model__C': 100, 'model__gamma': 0.01, 'select__k': 18}
+18/50: 0.879 -> 0.892; {'model__C': 1000, 'model__gamma': 0.01, 'select__k': 18}
+19/50: 0.772 -> 0.784; {'model__C': 100, 'model__gamma': 0.03, 'select__k': 18}
+20/50: 0.872 -> 0.907; {'model__C': 1000, 'model__gamma': 0.01, 'select__k': 18}
+21/50: 0.788 -> 0.800; {'model__C': 1000, 'model__gamma': 0.003, 'select__k': 18}
+22/50: 0.859 -> 0.870; {'model__C': 1000, 'model__gamma': 0.01, 'select__k': 18}
+23/50: 0.845 -> 0.824; {'model__C': 1000, 'model__gamma': 0.01, 'select__k': 18}
+24/50: 0.837 -> 0.837; {'model__C': 100, 'model__gamma': 0.01, 'select__k': 18}
+25/50: 0.862 -> 0.825; {'model__C': 100, 'model__gamma': 0.03, 'select__k': 18}
+26/50: 0.840 -> 0.840; {'model__C': 100, 'model__gamma': 0.01, 'select__k': 18}
+27/50: 0.881 -> 0.869; {'model__C': 1000, 'model__gamma': 0.01, 'select__k': 18}
+28/50: 0.839 -> 0.839; {'model__C': 100, 'model__gamma': 0.01, 'select__k': 18}
+29/50: 0.868 -> 0.881; {'model__C': 1000, 'model__gamma': 0.003, 'select__k': 18}
+30/50: 0.870 -> 0.905; {'model__C': 1000, 'model__gamma': 0.01, 'select__k': 18}
+31/50: 0.837 -> 0.837; {'model__C': 1000, 'model__gamma': 0.01, 'select__k': 18}
+32/50: 0.872 -> 0.873; {'model__C': 100, 'model__gamma': 0.03, 'select__k': 18}
+33/50: 0.810 -> 0.811; {'model__C': 1000, 'model__gamma': 0.01, 'select__k': 18}
+34/50: 0.813 -> 0.789; {'model__C': 1000, 'model__gamma': 0.003, 'select__k': 18}
+35/50: 0.794 -> 0.829; {'model__C': 1000, 'model__gamma': 0.01, 'select__k': 18}
+36/50: 0.854 -> 0.861; {'model__C': 1000, 'model__gamma': 0.01, 'select__k': 18}
+37/50: 0.866 -> 0.916; {'model__C': 100, 'model__gamma': 0.03, 'select__k': 18}
+38/50: 0.893 -> 0.869; {'model__C': 1000, 'model__gamma': 0.03, 'select__k': 18}
+39/50: 0.854 -> 0.854; {'model__C': 100, 'model__gamma': 0.01, 'select__k': 18}
+40/50: 0.869 -> 0.893; {'model__C': 1000, 'model__gamma': 0.01, 'select__k': 18}
+41/50: 0.837 -> 0.860; {'model__C': 100, 'model__gamma': 0.03, 'select__k': 18}
+42/50: 0.786 -> 0.810; {'model__C': 100, 'model__gamma': 0.03, 'select__k': 18}
+43/50: 0.800 -> 0.776; {'model__C': 1000, 'model__gamma': 0.01, 'select__k': 18}
+44/50: 0.895 -> 0.906; {'model__C': 1000, 'model__gamma': 0.01, 'select__k': 18}
+45/50: 0.839 -> 0.861; {'model__C': 100, 'model__gamma': 0.03, 'select__k': 18}
+46/50: 0.783 -> 0.874; {'model__C': 1000, 'model__gamma': 0.01, 'select__k': 18}
+47/50: 0.819 -> 0.881; {'model__C': 1000, 'model__gamma': 0.01, 'select__k': 18}
+48/50: 0.843 -> 0.855; {'model__C': 100, 'model__gamma': 0.03, 'select__k': 18}
+49/50: 0.831 -> 0.868; {'model__C': 100, 'model__gamma': 0.03, 'select__k': 18}
+50/50: 0.868 -> 0.917; {'model__C': 1000, 'model__gamma': 0.01, 'select__k': 18}
+{
+  "original": {
+    "macro_f1_fold_mean": 0.8416821804054044,
+    "balanced_accuracy_fold_mean": 0.8433991797676008,
+    "class_metrics": {
+      "bus": {
+        "precision": 0.9796672828096118,
+        "recall": 0.9724770642201835,
+        "f1": 0.9760589318600368,
+        "support": 1090
+      },
+      "opel": {
+        "precision": 0.7226487523992322,
+        "recall": 0.710377358490566,
+        "f1": 0.7164605137963844,
+        "support": 1060
+      },
+      "saab": {
+        "precision": 0.7250698974836906,
+        "recall": 0.7170506912442396,
+        "f1": 0.7210379981464319,
+        "support": 1085
+      },
+      "van": {
+        "precision": 0.9370764762826719,
+        "recall": 0.9728643216080402,
+        "f1": 0.9546351084812623,
+        "support": 995
+      }
+    }
+  },
+  "wide_svm": {
+    "macro_f1_fold_mean": 0.8516644586683395,
+    "balanced_accuracy_fold_mean": 0.8528827751196172,
+    "class_metrics": {
+      "bus": {
+        "precision": 0.9734432234432234,
+        "recall": 0.9752293577981651,
+        "f1": 0.9743354720439963,
+        "support": 1090
+      },
+      "opel": {
+        "precision": 0.7442084942084942,
+        "recall": 0.7273584905660377,
+        "f1": 0.7356870229007634,
+        "support": 1060
+      },
+      "saab": {
+        "precision": 0.7440585009140768,
+        "recall": 0.7502304147465437,
+        "f1": 0.7471317117944011,
+        "support": 1085
+      },
+      "van": {
+        "precision": 0.9454365079365079,
+        "recall": 0.9577889447236181,
+        "f1": 0.9515726410384423,
+        "support": 995
+      }
+    }
+  },
+  "paired_difference": 0.009982278262935209,
+  "corrected_95pct_interval": [
+    -0.008393062841877186,
+    0.028357619367747604
+  ],
+  "better_folds": 29,
+  "worse_folds": 12,
+  "extra_fits_estimate": 6171
+}

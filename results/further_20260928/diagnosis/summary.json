@@ -1,0 +1,22 @@
+{
+  "data_md5": "fbba18157b188f309d772f9ca4e578f5",
+  "car_rows": 429,
+  "persistent_errors_all_classes": 81,
+  "persistent_car_errors": 73,
+  "feature_duplicate_rows": 0,
+  "cross_label_duplicate_groups": 0,
+  "analysis_uses_all_labels": true,
+  "must_not_be_used_for_training_or_independent_test_selection": true,
+  "persistent": {
+    "rows": 73,
+    "opposite_closer_fraction": 0.726027397260274,
+    "median_opposite_among_five_nearest": 3.0,
+    "median_nearest_opposite_distance": 1.404500552930088
+  },
+  "never_wrong": {
+    "rows": 247,
+    "opposite_closer_fraction": 0.3805668016194332,
+    "median_opposite_among_five_nearest": 2.0,
+    "median_nearest_opposite_distance": 1.4903687190995052
+  }
+}

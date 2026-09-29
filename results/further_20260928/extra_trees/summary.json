@@ -1,0 +1,117 @@
+{
+  "model": "extra_trees",
+  "completed_splits": 50,
+  "total_test_predictions": 4230,
+  "distinct_records": 846,
+  "outer_splits_exploratory": true,
+  "parameter_counts": {
+    "{\"model__max_features\": 1.0, \"model__min_samples_leaf\": 2}": 15,
+    "{\"model__max_features\": 1.0, \"model__min_samples_leaf\": 1}": 32,
+    "{\"model__max_features\": 1.0, \"model__min_samples_leaf\": 4}": 3
+  },
+  "extra_trees": {
+    "mean_outer_fold_macro_f1": 0.7549105111890475,
+    "per_class_pooled": {
+      "bus": {
+        "precision": 0.9572953736654805,
+        "recall": 0.9871559633027523,
+        "f1": 0.971996386630533,
+        "repeated_support": 1090
+      },
+      "opel": {
+        "precision": 0.5855758880516685,
+        "recall": 0.5132075471698113,
+        "f1": 0.5470085470085471,
+        "repeated_support": 1060
+      },
+      "saab": {
+        "precision": 0.5689338235294118,
+        "recall": 0.5705069124423963,
+        "f1": 0.5697192820984813,
+        "repeated_support": 1085
+      },
+      "van": {
+        "precision": 0.8962350780532599,
+        "recall": 0.9809045226130654,
+        "f1": 0.9366602687140115,
+        "repeated_support": 995
+      }
+    },
+    "opel_saab_cross_errors": 839
+  },
+  "original": {
+    "mean_outer_fold_macro_f1": 0.8416821804054044,
+    "per_class_pooled": {
+      "bus": {
+        "precision": 0.9796672828096118,
+        "recall": 0.9724770642201835,
+        "f1": 0.9760589318600368,
+        "repeated_support": 1090
+      },
+      "opel": {
+        "precision": 0.7226487523992322,
+        "recall": 0.710377358490566,
+        "f1": 0.7164605137963844,
+        "repeated_support": 1060
+      },
+      "saab": {
+        "precision": 0.7250698974836906,
+        "recall": 0.7170506912442396,
+        "f1": 0.7210379981464319,
+        "repeated_support": 1085
+      },
+      "van": {
+        "precision": 0.9370764762826719,
+        "recall": 0.9728643216080402,
+        "f1": 0.9546351084812623,
+        "repeated_support": 995
+      }
+    },
+    "opel_saab_cross_errors": 563
+  },
+  "wide_svm": {
+    "mean_outer_fold_macro_f1": 0.8516644586683395,
+    "per_class_pooled": {
+      "bus": {
+        "precision": 0.9734432234432234,
+        "recall": 0.9752293577981651,
+        "f1": 0.9743354720439963,
+        "repeated_support": 1090
+      },
+      "opel": {
+        "precision": 0.7442084942084942,
+        "recall": 0.7273584905660377,
+        "f1": 0.7356870229007634,
+        "repeated_support": 1060
+      },
+      "saab": {
+        "precision": 0.7440585009140768,
+        "recall": 0.7502304147465437,
+        "f1": 0.7471317117944011,
+        "repeated_support": 1085
+      },
+      "van": {
+        "precision": 0.9454365079365079,
+        "recall": 0.9577889447236181,
+        "f1": 0.9515726410384423,
+        "repeated_support": 995
+      }
+    },
+    "opel_saab_cross_errors": 522
+  },
+  "versus_wide_svm": {
+    "mean_paired_difference": -0.09675394747929177,
+    "mean_paired_car_f1_difference": -0.18546232918537647,
+    "better_splits": 1,
+    "equal_splits": 0,
+    "worse_splits": 49,
+    "corrected_95pct_interval_descriptive": [
+      -0.12784465952420573,
+      -0.06566323543437781
+    ],
+    "corrected_95pct_car_interval_descriptive": [
+      -0.2437120293680264,
+      -0.12721262900272653
+    ]
+  }
+}

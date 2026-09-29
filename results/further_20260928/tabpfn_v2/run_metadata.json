@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "model": "tabpfn_v2",
+  "rows": 846,
+  "data_md5": "fbba18157b188f309d772f9ca4e578f5",
+  "outer_seeds": [
+    2026,
+    2027,
+    2028,
+    2029,
+    2030
+  ],
+  "outer_folds": 10,
+  "inner_folds": 5,
+  "scoring": "f1_macro",
+  "python": "3.10.5 (tags/v3.10.5:f377153, Jun  6 2022, 16:14:13) [MSC v.1929 64 bit (AMD64)]",
+  "sklearn": "1.6.1",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "exploratory": true,
+  "reason": "The same outer test folds were inspected during earlier model development."
+}

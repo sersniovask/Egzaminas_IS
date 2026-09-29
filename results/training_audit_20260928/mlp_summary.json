@@ -1,0 +1,10 @@
+{
+  "folds": 50,
+  "iterations_median": 35.5,
+  "iterations_min": 17,
+  "iterations_max": 64,
+  "convergence_warning_count": 0,
+  "loss_decreased_count": 50,
+  "best_validation_accuracy_mean": 0.8259740259740258,
+  "last_training_loss_mean": 0.275107719493905
+}
