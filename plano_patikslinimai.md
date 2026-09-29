@@ -2,7 +2,7 @@
 
 ## 2026-09-28 tyrimo strategijos redakcija
 
-Po dėstytojo grįžtamojo ryšio peržiūrėti du 2024 m. tyrimai su Vehicle Silhouettes duomenimis, patikrintas jų tinkamumas konkrečiai 18 požymių ir keturių klasių užduočiai. Atnaujintas pilnas kolokviumo dokumentas: `Kirilas_Sersniovas_Kolokviumo_planas_atnaujintas_2026-09-28.docx`. Tiriamieji bandymai ir jų ribos pateikti `ATNAUJINIMAS_2026-09-28.md`.
+Po dėstytojo grįžtamojo ryšio peržiūrėti du 2024 m. tyrimai su Vehicle Silhouettes duomenimis, patikrintas jų tinkamumas konkrečiai 18 požymių ir keturių klasių užduočiai. Galutinis kolokviumo dokumentas: `Kirilas_Sersniovas_Kolokviumo_planas_papildyti_bandymai_2026-09-28.pdf` (redaguojamas DOCX tuo pačiu baziniu pavadinimu). Ankstesnis tarpinis DOCX, kurio reikia atkūrimo scenarijui, yra `old/document_sources/`. Tiriamieji bandymai ir jų ribos pateikti `ATNAUJINIMAS_2026-09-28.md`.
 
 Ši redakcija parengta jau žinant pradinį 50 išorinių skaidinių rezultatą. Jos negalima vadinti iš anksto užregistruota pradine hipoteze. Neigiamas Opel–Saab specialisto rezultatas išsaugotas. Platesnės paieškos SVM rodo nedidelį tiriamąjį pagerėjimą, tačiau porinio skirtumo intervalas apima nulį ir nėra naujo nepriklausomo duomenų rinkinio.
 

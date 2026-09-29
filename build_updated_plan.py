@@ -9,7 +9,7 @@ from docx.shared import Cm, Pt, RGBColor
 
 ROOT = Path(__file__).resolve().parent
 SOURCE = ROOT / "report_assets" / "Kirilas_Sersniovas_Kolokviumo_igyvendinimo_planas.docx"
-DEST = ROOT / "Kirilas_Sersniovas_Kolokviumo_planas_atnaujintas_2026-09-28.docx"
+DEST = ROOT / "old" / "document_sources" / "Kirilas_Sersniovas_Kolokviumo_planas_atnaujintas_2026-09-28.docx"
 wide = json.loads((ROOT / "results/wide_svm_20260928/summary.json").read_text(encoding="utf-8"))
 focused = json.loads((ROOT / "results/improvement_20260928/summary.json").read_text(encoding="utf-8"))
 audit = json.loads((ROOT / "results/training_audit_20260928/parameter_summary.json").read_text(encoding="utf-8"))
@@ -127,5 +127,6 @@ sec.right_margin = Cm(2.1)
 for style_name in ["Normal", "Body Text"]:
     doc.styles[style_name].font.name = "Arial"
     doc.styles[style_name].font.size = Pt(10)
+DEST.parent.mkdir(parents=True, exist_ok=True)
 doc.save(DEST)
 print(DEST)

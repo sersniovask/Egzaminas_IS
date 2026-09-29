@@ -1,6 +1,6 @@
 # Tęstinio eksperimento būsena ir atkūrimas
 
-Šis failas skirtas tam atvejui, jei darbas nutrūktų prieš baigiant visus bandymus. Projekto darbo kopija yra `C:\Users\sersn\Documents\ChatGPT\IS Egzaminas\Egzaminas_20260928`. Ankstesni `results/main`, `results/wide_svm_20260928` ir dokumentai neperrašyti.
+Šis failas skirtas papildomų bandymų atkūrimui. Komandas vykdykite šiame projekto aplanke. `results/main/` ir `results/wide_svm_20260928/` išlieka atskiri nuo naujų bandymų; ankstesnės pateikimo versijos yra `old/`.
 
 ## Dabartinė eiga
 
@@ -16,10 +16,10 @@
 Projekto kataloge (PowerShell):
 
 ```powershell
-& 'C:\Users\sersn\Documents\ChatGPT\IS Egzaminas\.venv\Scripts\python.exe' experiment_next_20260928.py extra_trees --max-splits 50
+& '.\.venv\Scripts\python.exe' experiment_next_20260928.py extra_trees --max-splits 50
 & 'C:\Users\sersn\Documents\ChatGPT\IS Egzaminas\.venv_tabpfn\Scripts\python.exe' experiment_next_20260928.py tabpfn_v2 --max-splits 50
-& 'C:\Users\sersn\Documents\ChatGPT\IS Egzaminas\.venv\Scripts\python.exe' summarize_next_20260928.py
-& 'C:\Users\sersn\Documents\ChatGPT\IS Egzaminas\.venv\Scripts\python.exe' verify_next_20260928.py
+& '.\.venv\Scripts\python.exe' summarize_next_20260928.py
+& '.\.venv\Scripts\python.exe' verify_next_20260928.py --read-only
 ```
 
 `experiment_next_20260928.py` pagal nutylėjimą praleidžia baigtus ir patikrintus skaidinius, todėl galima tiesiog pakartoti komandą. Nenaudoti `--no-resume`, jei norima išsaugoti atliktą darbą.
@@ -28,6 +28,6 @@ Projekto kataloge (PowerShell):
 
 ## Baigiamieji veiksmai
 
-Visi skaičiavimai ir dokumentų kūrimas baigti. Į naudotojo `Desktop\Magistras\1 semestras\Intelektualios sistemos\Egzaminas` katalogą nukopijuota 15 aukščiausio lygmens failų ir 177 `results/further_20260928/` failai; jų SHA-256 sutapimas patikrintas. Nauji rezultatai yra tiriamieji, nes ankstesnė išorinių testų informacija jau buvo matyta. Nepriklausomas naujų ženklintų siluetų testas dar neįmanomas, nes tokių duomenų negauta.
+Visi suplanuoti skaičiavimai ir pateikimo dokumentai baigti. Pagrindiniame projekto aplanke paliktos naujausios pateikimo versijos; senesni dokumentai ir nebenaudojami rezultatai perkelti į `old/`. Nauji rezultatai yra tiriamieji, nes ankstesnė išorinių testų informacija jau buvo matyta. Nepriklausomas naujų ženklintų siluetų testas dar neįmanomas, nes tokių duomenų negauta.
 
 2026-09-29 papildomai sutvarkyta paleidimo eiga: `START.cmd` 3 pasirinkimas tikrina išsaugotus naujus rezultatus, 4 pasirinkimas taiko TabPFN naujam JSON įrašui. Komandinės alternatyvos: `.\START.cmd --verify-further` ir `.\START.cmd --predict-tabpfn "C:\kelias\irasas.json"`. Antras meniu pasirinkimas sąmoningai paliktas tik pradiniam eksperimentui; daugiau informacijos `PALEIDIMAS_IR_GITHUB.md` ir README.

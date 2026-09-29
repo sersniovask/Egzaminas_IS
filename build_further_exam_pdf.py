@@ -20,7 +20,7 @@ from PIL import Image as PILImage
 
 
 ROOT = Path(__file__).resolve().parent
-BASE = ROOT / "Egzamino_ataskaita_atnaujinta_2026-09-28.pdf"
+BASE = ROOT / "old" / "document_sources" / "Egzamino_ataskaita_atnaujinta_2026-09-28.pdf"
 OUT = ROOT / "Egzamino_ataskaita_papildyti_bandymai_2026-09-28.pdf"
 APPENDIX = ROOT / "tmp" / "further_experiments_appendix.pdf"
 RESULTS = ROOT / "results" / "further_20260928"

@@ -113,7 +113,7 @@ def main():
     if args.overview_only:
         notebooks = {}
     notebooks['00_REZULTATU_SANTRAUKA.ipynb'] = overview()
-    backup = ROOT / 'results/notebook_backups' / datetime.now().strftime('%Y%m%d_%H%M%S_%f')
+    backup = ROOT / 'old/notebook_backups' / datetime.now().strftime('%Y%m%d_%H%M%S_%f')
     for filename, notebook in notebooks.items():
         notebook.metadata['kernelspec'] = {'display_name': 'Python 3', 'language': 'python', 'name': 'python3'}
         notebook.metadata['language_info'] = {'name': 'python'}

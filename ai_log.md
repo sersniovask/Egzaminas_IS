@@ -87,3 +87,7 @@ Naudotojui paprašius peržiūrėti istoriją ir pateikimo grafikus, aptikta, ka
 
 B priedo lentelė papildyta atmesto Opel-Saab specialisto rezultatu. Iš jau išsaugotų 50 išorinių testų prognozių sukurti du nauji grafikai: poriniai trijų naujų modelių Macro-F1 skirtumai prieš ankstesnį platesnį SVM ir dviejų modelių painiavos matricų palyginimas. Ankstesni grafikai palikti, nes jie vaizduoja kitus klausimus: pradinį metodų palyginimą, požymių jautrumą, atsparumą ir pradinę klaidų struktūrą. Nė vienas modelis šiame audite nepermokytas, eksperimentų rezultatų failai nekeisti. Vizualizavimo kodas: `build_further_charts.py`; PDF sudarymo kodas: `build_exam_pdf.py` ir `build_further_exam_pdf.py`.
 
+## 2026-09-29 dabartinių failų navigacija ir archyvas
+
+Naudotojui paprašius palikti aiškią dabartinę struktūrą, README perrašytas pagal aktualius pateikimo dokumentus, paleidimo komandas, kodo modulius ir rezultatų aplankus. Ankstesnės dokumentų versijos ir nebenaudojami vykdymų rezultatai perkelti į `old/`; tarpiniai šaltiniai `old/document_sources/` palikti, nes galutinio PDF ir DOCX generavimo scenarijai juos skaito. Dabartiniai `results/main/`, `results/wide_svm_20260928/`, `results/improvement_20260928/`, `results/training_audit_20260928/` ir `results/further_20260928/` nepajudinti, nes yra galutinės ataskaitos įrodymai. Sąsiuvinių generatorius ateityje atsargines kopijas dės į `old/notebook_backups/`. Patikrintas dokumentų atkūrimas, 12 testų ir `.\START.cmd --verify-further` galutiniame aplanke.
+

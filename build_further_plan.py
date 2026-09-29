@@ -11,7 +11,7 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.shared import Cm, Pt
 
 ROOT = Path(__file__).resolve().parent
-BASE = ROOT / "Kirilas_Sersniovas_Kolokviumo_planas_atnaujintas_2026-09-28.docx"
+BASE = ROOT / "old" / "document_sources" / "Kirilas_Sersniovas_Kolokviumo_planas_atnaujintas_2026-09-28.docx"
 OUT = ROOT / "Kirilas_Sersniovas_Kolokviumo_planas_papildyti_bandymai_2026-09-28.docx"
 RESULTS = ROOT / "results" / "further_20260928"
 

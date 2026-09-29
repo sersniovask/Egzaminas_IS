@@ -13,3 +13,6 @@ results/*
 .ipynb_checkpoints/
 .jupyter-run/
 tmp/
+old/results/
+old/notebook_backups/
+old/.ipynb_checkpoints/

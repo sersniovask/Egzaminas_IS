@@ -23,7 +23,7 @@ from reportlab.platypus import (
 ROOT = Path(__file__).resolve().parent
 PROJECT = ROOT
 RESULTS = PROJECT / 'results' / 'main'
-OUT = PROJECT / 'Egzamino_ataskaita_atnaujinta_2026-09-28.pdf'
+OUT = PROJECT / 'old' / 'document_sources' / 'Egzamino_ataskaita_atnaujinta_2026-09-28.pdf'
 TMP = ROOT / 'report_assets'
 TMP.mkdir(parents=True, exist_ok=True)
 
@@ -297,7 +297,7 @@ p(f"Porinis Macro-F1 pokytis: {wide['paired_difference']:+.3f}; didesnis rezulta
 p(f"Pirminio MLP parametrų audite alpha=0,01 laimėjo 34/50, (32,16) paslėptų vienetų konfigūracija 30/50, mokymosi žingsnis 0,01 - 50/50. Pakartotinai išmokius 50 pasirinktų MLP konfigūracijų, medianinis epochų skaičius buvo {mlp['iterations_median']:.1f} (intervalas {mlp['iterations_min']}-{mlp['iterations_max']}); pradinė ir galutinė mokymo nuostolių reikšmės krito {mlp['loss_decreased_count']}/50 atvejų, konvergencijos perspėjimų {mlp['convergence_warning_count']}. Tai neįrodo, kad mokymas optimalus; ankstyvas stabdymas ir ribotas tinklelis lieka galimi kokybės ribojimai.")
 p('Išorinės metrikos apskaičiuotos iš išsaugotų prognozių, o visi trys tiriamieji variantai turi atskirus rezultatų failus. Pradinis results/main/ neperrašytas. Naujiems duomenims galiojantį veikimą reikia tikrinti su nepriklausomai surinktais ir paženklintais siluetais; sintetinių ženklintų pavyzdžių iš tų pačių 846 įrašų šiame darbe nepridėta.')
 h2('Šaltiniai')
-p('Užduotis: PEPfm-26_Kirilas_Sersniovas.docx. Atnaujintas planas: Kirilas_Sersniovas_Kolokviumo_planas_atnaujintas_2026-09-28.docx. Duomenys: OpenML Vehicle ID 54, https://www.openml.org/d/54. Pirminiai tyrimai: https://doi.org/10.32604/cmes.2024.048049 ir https://doi.org/10.1371/journal.pone.0311041. Klasikiniai modeliai: Cortes ir Vapnik (1995), DOI 10.1007/BF00994018; Rumelhart ir kt. (1986), DOI 10.1038/323533a0; Moody ir Darken (1989), DOI 10.1162/neco.1989.1.2.281.')
+p('Užduotis: PEPfm-26_Kirilas_Sersniovas.docx. Galutinis planas: Kirilas_Sersniovas_Kolokviumo_planas_papildyti_bandymai_2026-09-28.pdf. Duomenys: OpenML Vehicle ID 54, https://www.openml.org/d/54. Pirminiai tyrimai: https://doi.org/10.32604/cmes.2024.048049 ir https://doi.org/10.1371/journal.pone.0311041. Klasikiniai modeliai: Cortes ir Vapnik (1995), DOI 10.1007/BF00994018; Rumelhart ir kt. (1986), DOI 10.1038/323533a0; Moody ir Darken (1989), DOI 10.1162/neco.1989.1.2.281.')
 story.append(PageBreak())
 
 h1('A priedas. Originali individuali egzamino užduotis')
@@ -331,6 +331,7 @@ def on_page(canvas, doc):
     canvas.drawRightString(w-44,26,f'{doc.page}')
     canvas.restoreState()
 
+OUT.parent.mkdir(parents=True, exist_ok=True)
 doc=SimpleDocTemplate(str(OUT),pagesize=A4,rightMargin=44,leftMargin=44,
                       topMargin=48,bottomMargin=45,title='Transporto priemonių siluetų klasifikavimas - egzamino ataskaita',
                       author='Kirilas Šeršniovas')
